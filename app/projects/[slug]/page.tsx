@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -7,7 +8,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { featuredProjects } from "@/content/site-data";
+import { featuredProjects, siteMeta } from "@/content/site-data";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -15,15 +16,66 @@ type ProjectPageProps = {
   }>;
 };
 
+function getProjectBySlug(slug: string) {
+  return featuredProjects.find((item) => item.slug === slug);
+}
+
 export function generateStaticParams() {
   return featuredProjects.map((project) => ({
     slug: project.slug,
   }));
 }
 
+export async function generateMetadata({
+  params,
+}: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+      description: "The requested project case study could not be found.",
+    };
+  }
+
+  const image =
+    project.media.find((item) => item.type === "image" && item.src)?.src ?? siteMeta.photo;
+  const projectUrl = `/projects/${project.slug}`;
+  const title = `${project.title} | Skyler Smith Portfolio`;
+
+  return {
+    title: project.title,
+    description: project.summary,
+    alternates: {
+      canonical: projectUrl,
+    },
+    openGraph: {
+      type: "article",
+      url: projectUrl,
+      title,
+      description: project.summary,
+      images: image
+        ? [
+            {
+              url: image,
+              alt: project.title,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: project.summary,
+      images: image ? [image] : undefined,
+    },
+  };
+}
+
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
-  const project = featuredProjects.find((item) => item.slug === slug);
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     notFound();

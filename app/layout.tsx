@@ -14,9 +14,59 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Skyler Smith | Portfolio",
+  metadataBase: new URL("https://skylersmith.me"),
+  title: {
+    default: "Skyler Smith Portfolio | AI, Product, and Software Projects",
+    template: "%s | Skyler Smith Portfolio",
+  },
   description:
-    "A modern portfolio for Skyler Smith featuring AI-driven products, technical projects, and business-minded product work.",
+    "Explore the Skyler Smith portfolio featuring AI products, software projects, case studies, and business-minded product work.",
+  keywords: [
+    "Skyler Smith",
+    "Skyler Smith Portfolio",
+    "Skyler Smith projects",
+    "AI portfolio",
+    "product portfolio",
+    "software projects",
+  ],
+  authors: [{ name: "Skyler Smith", url: "https://skylersmith.me" }],
+  creator: "Skyler Smith",
+  publisher: "Skyler Smith",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    url: "https://skylersmith.me",
+    siteName: "Skyler Smith Portfolio",
+    title: "Skyler Smith Portfolio | AI, Product, and Software Projects",
+    description:
+      "Explore the Skyler Smith portfolio featuring AI products, software projects, case studies, and business-minded product work.",
+    images: [
+      {
+        url: "/images/about/skylerbeach.JPG",
+        alt: "Skyler Smith portrait",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Skyler Smith Portfolio | AI, Product, and Software Projects",
+    description:
+      "Explore the Skyler Smith portfolio featuring AI products, software projects, case studies, and business-minded product work.",
+    images: ["/images/about/skylerbeach.JPG"],
+  },
 };
 
 export default function RootLayout({

@@ -28,6 +28,7 @@ import {
 const GALLERY_EXCLUDE = new Set(["skylerbeach.JPG", "byulogo.svg"]);
 const GALLERY_RE = /\.(jpe?g|png|gif|webp|mp4|webm)$/i;
 const GALLERY_VIDEO_RE = /\.(mp4|webm)$/i;
+const SITE_URL = "https://skylersmith.me";
 
 export default function Home() {
   const aboutDir = path.join(process.cwd(), "public/images/about");
@@ -43,8 +44,42 @@ export default function Home() {
 
       return a.localeCompare(b);
     });
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        name: siteMeta.name,
+        url: SITE_URL,
+        image: `${SITE_URL}${siteMeta.photo}`,
+        description: siteMeta.intro,
+        jobTitle: siteMeta.role,
+        sameAs: [siteMeta.linkedin],
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: education.school,
+        },
+      },
+      {
+        "@type": "WebSite",
+        name: "Skyler Smith Portfolio",
+        url: SITE_URL,
+        description:
+          "Skyler Smith portfolio featuring AI products, software projects, and business-minded product work.",
+        author: {
+          "@type": "Person",
+          name: siteMeta.name,
+        },
+      },
+    ],
+  };
+
   return (
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="pointer-events-none absolute inset-0 opacity-50">
         <div className="grid-sheen absolute inset-0" />
       </div>
@@ -67,6 +102,10 @@ export default function Home() {
                 </h1>
                 <p className="mt-5 max-w-2xl text-xl leading-8 text-white/78 sm:text-2xl">
                   {siteMeta.headline}
+                </p>
+                <p className="mt-4 max-w-2xl text-base leading-7 text-white/68 sm:text-lg">
+                  This Skyler Smith portfolio features AI, product, and software
+                  projects built with a business lens.
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <ScrollToProjectsButton />
@@ -110,6 +149,7 @@ export default function Home() {
             <SectionHeading
               eyebrow="Featured Work"
               title="Projects"
+              description="A portfolio of AI, product, and software projects spanning verification, analytics, automation, and data experiences."
             />
           </Reveal>
           <div className="mt-12 space-y-8">
@@ -172,7 +212,7 @@ export default function Home() {
             <Reveal>
               <SectionHeading
                 eyebrow="Experience"
-                title="Technical, business, and customer-facing reps."
+                title="Experience across product, engineering, and customer work."
               />
             </Reveal>
             <div className="mt-10 space-y-5">
@@ -267,13 +307,39 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="section-shell px-3 py-6 sm:px-8 sm:py-10 lg:px-14">
-          <Reveal delay={0.12}>
-            <div className="relative mt-4 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 sm:p-6">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(145,223,182,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(113,149,211,0.18),transparent_32%)]" />
-              <LifeGallery mediaPaths={galleryFiles} />
+        <section id="about" className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <Reveal>
+                <SectionHeading
+                  eyebrow="About"
+                  title="About Skyler Smith"
+                  description={siteMeta.intro}
+                />
+              </Reveal>
+              <Reveal
+                delay={0.08}
+                className="mt-6 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6"
+              >
+                <p className="text-base leading-7 text-white/72">
+                  I am an Information Systems student at BYU focused on building
+                  polished software, AI-assisted products, and recruiter-ready case
+                  studies that show both technical depth and business value.
+                </p>
+                <p className="mt-4 text-base leading-7 text-white/68">
+                  Beyond the portfolio itself, I care about creating experiences
+                  that are useful, clear, and credible for real teams and real
+                  customers.
+                </p>
+              </Reveal>
             </div>
-          </Reveal>
+            <Reveal delay={0.12}>
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 sm:p-6">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(145,223,182,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(113,149,211,0.18),transparent_32%)]" />
+                <LifeGallery mediaPaths={galleryFiles} />
+              </div>
+            </Reveal>
+          </div>
         </section>
 
         <section id="interests" className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:gap-10">
@@ -281,7 +347,7 @@ export default function Home() {
             <Reveal>
               <SectionHeading
                 eyebrow="Beyond the Headline"
-                title="Smaller builds, experiments, and side interests."
+                title="More projects, experiments, and side interests."
               />
             </Reveal>
             <div className="mt-10 grid gap-4 sm:grid-cols-2">
@@ -336,10 +402,11 @@ export default function Home() {
               <div className="max-w-2xl">
                 <Badge className="mb-4">Let&apos;s Connect</Badge>
                 <h2 className="font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                  Thanks for stopping by.
+                  Contact Skyler Smith
                 </h2>
                 <p className="mt-5 text-base leading-7 text-white/70 sm:text-lg">
-                  Interested in working together? Reach out anytime.
+                  If you are hiring for product, AI, or software roles, reach out
+                  anytime to connect about opportunities or projects.
                 </p>
               </div>
               <div className="flex flex-col gap-3">
