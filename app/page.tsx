@@ -307,39 +307,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-            <div>
-              <Reveal>
-                <SectionHeading
-                  eyebrow="About"
-                  title="About Skyler Smith"
-                  description={siteMeta.intro}
-                />
-              </Reveal>
-              <Reveal
-                delay={0.08}
-                className="mt-6 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6"
-              >
-                <p className="text-base leading-7 text-white/72">
-                  I am an Information Systems student at BYU focused on building
-                  polished software, AI-assisted products, and recruiter-ready case
-                  studies that show both technical depth and business value.
-                </p>
-                <p className="mt-4 text-base leading-7 text-white/68">
-                  Beyond the portfolio itself, I care about creating experiences
-                  that are useful, clear, and credible for real teams and real
-                  customers.
-                </p>
-              </Reveal>
+        <section id="about" className="section-shell px-3 py-6 sm:px-8 sm:py-10 lg:px-14">
+          <Reveal delay={0.12}>
+            <div className="relative mt-4 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 sm:p-6">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(145,223,182,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(113,149,211,0.18),transparent_32%)]" />
+              <LifeGallery mediaPaths={galleryFiles} />
             </div>
-            <Reveal delay={0.12}>
-              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 sm:p-6">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(145,223,182,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(113,149,211,0.18),transparent_32%)]" />
-                <LifeGallery mediaPaths={galleryFiles} />
-              </div>
-            </Reveal>
-          </div>
+          </Reveal>
         </section>
 
         <section id="interests" className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:gap-10">
