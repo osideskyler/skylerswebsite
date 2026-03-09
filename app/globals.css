@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  --background: 220 35% 7%;
+  --foreground: 210 33% 98%;
+  --muted: 215 22% 18%;
+  --muted-foreground: 215 15% 72%;
+  --card: 220 30% 10%;
+  --card-foreground: 210 33% 98%;
+  --border: 217 19% 20%;
+  --ring: 146 45% 68%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-border: hsl(var(--border));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(86, 173, 131, 0.16), transparent 28%),
+    radial-gradient(circle at 20% 20%, rgba(86, 145, 200, 0.18), transparent 30%),
+    linear-gradient(180deg, #04070d 0%, #071019 55%, #04070d 100%);
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans), sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(138, 218, 176, 0.3);
+}
+
+.grid-sheen {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.glass-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(24px);
+}
+
+.section-shell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2rem;
+  background: linear-gradient(180deg, rgba(9, 16, 24, 0.92), rgba(6, 10, 16, 0.92));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
