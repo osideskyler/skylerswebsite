@@ -1,32 +1,39 @@
+import fs from "fs";
+import path from "path";
+
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BriefcaseBusiness,
-  GraduationCap,
-  Mail,
-  Mountain,
-} from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, Mail, Mountain } from "lucide-react";
 
+import { LifeGallery } from "@/components/life-gallery";
 import { ProjectMediaFrame } from "@/components/project-media";
 import { Reveal } from "@/components/reveal";
+import { RotatingHighlightCards } from "@/components/rotating-highlight-cards";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
+import { ScrollToProjectsButton } from "@/components/scroll-to-projects-button";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   education,
   experiences,
   featuredProjects,
-  heroHighlights,
   interests,
+  rotatingResumeCards,
   secondaryProjects,
   siteMeta,
   skillGroups,
-  snapshots,
 } from "@/content/site-data";
 
+const GALLERY_EXCLUDE = new Set(["skylerbeach.JPG", "byulogo.svg"]);
+const GALLERY_RE = /\.(jpe?g|png|gif|webp|mp4|webm)$/i;
+
 export default function Home() {
+  const aboutDir = path.join(process.cwd(), "public/images/about");
+  const galleryFiles = fs
+    .readdirSync(aboutDir)
+    .filter((f) => GALLERY_RE.test(f) && !GALLERY_EXCLUDE.has(f))
+    .sort();
   return (
     <div className="relative">
       <div className="pointer-events-none absolute inset-0 opacity-50">
@@ -41,26 +48,19 @@ export default function Home() {
             <Reveal>
               <div className="max-w-3xl">
                 <Badge className="mb-5">Portfolio 2026</Badge>
-                <p className="mb-4 text-sm uppercase tracking-[0.35em] text-white/55">
-                  {siteMeta.role}
-                </p>
+                {siteMeta.role && (
+                  <p className="mb-4 text-sm uppercase tracking-[0.35em] text-white/55">
+                    {siteMeta.role}
+                  </p>
+                )}
                 <h1 className="font-display text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
                   {siteMeta.name}
                 </h1>
                 <p className="mt-5 max-w-2xl text-xl leading-8 text-white/78 sm:text-2xl">
                   {siteMeta.headline}
                 </p>
-                <p className="mt-6 max-w-2xl text-base leading-7 text-white/68 sm:text-lg">
-                  Software that solves real problems, communicates value, and
-                  feels polished enough for customers and recruiters alike.
-                </p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Button asChild size="lg">
-                    <Link href="#projects">
-                      Explore projects
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  </Button>
+                  <ScrollToProjectsButton />
                   <Button asChild variant="secondary" size="lg">
                     <Link href={siteMeta.resume} target="_blank">
                       View resume
@@ -100,7 +100,7 @@ export default function Home() {
           <Reveal>
             <SectionHeading
               eyebrow="Featured Work"
-              title="Projects built to earn a second look."
+              title="Projects"
             />
           </Reveal>
           <div className="mt-12 space-y-8">
@@ -141,32 +141,20 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+          <div className="mt-8 flex justify-center">
+            <Button asChild variant="ghost" size="lg">
+              <Link href="#interests">See the rest of the projects below</Link>
+            </Button>
+          </div>
         </section>
 
         <Reveal>
           <div className="section-shell px-6 py-10 sm:px-10 lg:px-14">
             <div className="flex items-center gap-3 mb-8 text-sm uppercase tracking-[0.3em] text-white/50">
               <Mountain className="h-4 w-4" />
-              Outdoor x product builder
+              Notable achievements and experience
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {heroHighlights.map((highlight) => (
-                <div
-                  key={highlight.label}
-                  className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5"
-                >
-                  <p className="text-sm uppercase tracking-[0.28em] text-white/45">
-                    {highlight.label}
-                  </p>
-                  <p className="font-display text-4xl font-semibold text-white mt-2">
-                    {highlight.value}
-                  </p>
-                  <p className="mt-3 text-sm leading-6 text-white/68">
-                    {highlight.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <RotatingHighlightCards cards={rotatingResumeCards} />
           </div>
         </Reveal>
 
@@ -196,9 +184,11 @@ export default function Home() {
                         {experience.dates}
                       </p>
                     </div>
-                    <p className="mt-4 text-sm leading-6 text-white/72">
-                      • {experience.bullets[0]}
-                    </p>
+                    <ul className="mt-4 space-y-1 text-sm leading-6 text-white/72 list-disc list-inside">
+                      {experience.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
                   </article>
                 </Reveal>
               ))}
@@ -215,9 +205,13 @@ export default function Home() {
               </Reveal>
               <Reveal delay={0.08} className="mt-10 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6">
                 <div className="flex items-center gap-3">
-                  <div className="rounded-full border border-white/12 bg-white/8 p-3">
-                    <GraduationCap className="h-5 w-5 text-white" />
-                  </div>
+                  <Image
+                    src="/images/about/byulogo.svg"
+                    alt="BYU Logo"
+                    width={44}
+                    height={44}
+                    className="h-11 w-11"
+                  />
                   <div>
                     <h3 className="text-lg font-semibold text-white">{education.school}</h3>
                     <p className="text-sm text-white/65">{education.graduation}</p>
@@ -264,54 +258,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="section-shell px-6 py-14 sm:px-10 lg:px-14">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <Reveal>
-              <SectionHeading
-                eyebrow="About Me"
-                title="A portfolio that feels like the work and the person behind it."
-              />
-            </Reveal>
-
-            <Reveal delay={0.12}>
-              <div className="relative min-h-[26rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(145,223,182,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(113,149,211,0.18),transparent_32%)]" />
-                {snapshots.map((snapshot, index) => {
-                  const positions = [
-                    "left-5 top-5",
-                    "right-8 top-10",
-                    "left-10 top-36",
-                    "right-6 top-44",
-                    "left-18 bottom-8",
-                    "right-20 bottom-12",
-                  ];
-
-                  return (
-                    <div
-                      key={snapshot.title}
-                      className={`glass-card absolute w-40 rounded-[1.5rem] p-4 shadow-[0_20px_50px_rgba(0,0,0,0.25)] ${positions[index]}`}
-                    >
-                      <div className="mb-4 aspect-[4/5] overflow-hidden rounded-[1.15rem] bg-[linear-gradient(160deg,rgba(255,255,255,0.12),rgba(255,255,255,0.02)),radial-gradient(circle_at_top,rgba(132,197,155,0.32),transparent_45%)]">
-                        {snapshot.imageSrc ? (
-                          <Image
-                            src={snapshot.imageSrc}
-                            alt={snapshot.title}
-                            width={320}
-                            height={400}
-                            className="h-full w-full object-cover"
-                          />
-                        ) : null}
-                      </div>
-                      <h3 className="text-sm font-semibold text-white">{snapshot.title}</h3>
-                      <p className="mt-1 text-xs leading-5 text-white/62">
-                        {snapshot.subtitle}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </Reveal>
-          </div>
+        <section id="about" className="section-shell px-6 py-10 sm:px-10 lg:px-14">
+          <Reveal delay={0.12}>
+            <div className="relative mt-4 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 sm:p-6">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(145,223,182,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(113,149,211,0.18),transparent_32%)]" />
+              <LifeGallery mediaPaths={galleryFiles} />
+            </div>
+          </Reveal>
         </section>
 
         <section id="interests" className="grid gap-10 lg:grid-cols-[1fr_1fr]">
@@ -374,15 +327,19 @@ export default function Home() {
               <div className="max-w-2xl">
                 <Badge className="mb-4">Let&apos;s Connect</Badge>
                 <h2 className="font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                  Built to be memorable, clear, and easy to update.
+                  Thanks for stopping by.
                 </h2>
                 <p className="mt-5 text-base leading-7 text-white/70 sm:text-lg">
                   Interested in working together? Reach out anytime.
                 </p>
               </div>
               <div className="flex flex-col gap-3">
-                <Button asChild size="lg">
-                  <Link href={`mailto:${siteMeta.email}`}>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="light"
+                >
+                  <Link href={`mailto:${siteMeta.email}`} className="flex items-center gap-2">
                     <Mail className="h-4 w-4" />
                     {siteMeta.email}
                   </Link>

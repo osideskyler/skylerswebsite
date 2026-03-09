@@ -15,6 +15,8 @@ const buttonVariants = cva(
           "bg-[hsl(var(--foreground))] px-5 py-3 text-[hsl(var(--background))] shadow-[0_12px_40px_rgba(255,255,255,0.08)] hover:-translate-y-0.5 hover:bg-white",
         secondary:
           "border border-white/15 bg-white/6 px-5 py-3 text-white backdrop-blur hover:-translate-y-0.5 hover:bg-white/10",
+        light:
+          "border border-white/70 bg-white px-5 py-3 !text-black shadow-[0_10px_30px_rgba(0,0,0,0.18)] hover:-translate-y-0.5 hover:bg-white/90 hover:!text-black",
         ghost: "px-4 py-2 text-white/80 hover:text-white",
       },
       size: {

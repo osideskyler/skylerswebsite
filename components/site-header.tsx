@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { TypewriterName } from "@/components/typewriter-name";
+
 const navItems = [
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
@@ -16,7 +18,7 @@ export function SiteHeader() {
           href="/"
           className="text-sm font-semibold uppercase tracking-[0.35em] text-white/85"
         >
-          Skyler Smith
+          <TypewriterName />
         </Link>
         <nav className="hidden items-center gap-6 md:flex">
           {navItems.map((item) => (

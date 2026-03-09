@@ -48,6 +48,24 @@ export type Snapshot = {
   imageSrc?: string;
 };
 
+export type ResumeHighlightIcon =
+  | "badgePercent"
+  | "briefcaseBusiness"
+  | "headset"
+  | "trophy"
+  | "clock3"
+  | "layoutDashboard"
+  | "megaphone"
+  | "users"
+  | "languages";
+
+export type ResumeHighlightCard = {
+  label: string;
+  value: string;
+  detail: string;
+  icon: ResumeHighlightIcon;
+};
+
 export const siteMeta = {
   name: "Skyler Smith",
   role: "Information Systems Student",
@@ -62,26 +80,60 @@ export const siteMeta = {
   photo: "/images/about/skylerbeach.JPG",
 };
 
-export const heroHighlights = [
+export const rotatingResumeCards: ResumeHighlightCard[] = [
   {
-    label: "Cost Reduction",
+    label: "Trust Scores",
     value: "98%",
     detail: "Cut verification cost per user in the Trust Scores platform.",
+    icon: "badgePercent",
   },
   {
-    label: "Owned Pipeline",
+    label: "Redo",
     value: "$180k/mo",
     detail: "Acted as SME for a claims dashboard workflow at Redo.",
+    icon: "briefcaseBusiness",
   },
   {
-    label: "Customer Support",
+    label: "Redo",
     value: "500+",
     detail: "Resolved technical issues with perfect CSAT.",
+    icon: "headset",
   },
   {
-    label: "Competition Win",
+    label: "BYU ",
     value: "1st Place",
     detail: "Won BYU's IS Core INTEX competition.",
+    icon: "trophy",
+  },
+  {
+    label: "Trust Labs",
+    value: "10 Sec",
+    detail: "Helped engineer a fast verification flow that kept user friction low.",
+    icon: "clock3",
+  },
+  {
+    label: "Redo",
+    value: "1 App",
+    detail: "Developed a claims dashboard web app for analytics and process automation.",
+    icon: "layoutDashboard",
+  },
+  {
+    label: "RV Fun Center & BallBoyz",
+    value: "50%",
+    detail: "Cut cost per result while improving lead quality in freelance campaigns.",
+    icon: "megaphone",
+  },
+  {
+    label: "Mission Service",
+    value: "20+",
+    detail: "Mentored volunteers through weekly coaching and leadership development.",
+    icon: "users",
+  },
+  {
+    label: "Spanish Fluency",
+    value: "2 Years",
+    detail: "Built communication skills through full-time service work in Mexico City.",
+    icon: "languages",
   },
 ];
 
@@ -172,9 +224,11 @@ export const featuredProjects: FeaturedProject[] = [
     media: [
       {
         type: "image",
+        src: "/images/projects/redo/IMG_2390.jpeg",
         alt: "Redo claims dashboard screenshot",
-        caption: "Use a screenshot with charting, filters, or workflow views.",
-        placeholder: "Dashboard screenshot slot",
+        caption:
+          "Redo claims dashboard view highlighting analytics, status details, and workflow context.",
+        placeholder: "Redo dashboard screenshot",
       },
       {
         type: "video",
