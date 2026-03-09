@@ -48,17 +48,6 @@ export type Snapshot = {
   imageSrc?: string;
 };
 
-const githubPagesBasePath =
-  process.env.GITHUB_PAGES === "true" ? "/skylerswebsite" : "";
-
-function withBasePath(path: string) {
-  if (!path.startsWith("/")) {
-    return `${githubPagesBasePath}/${path}`;
-  }
-
-  return `${githubPagesBasePath}${path}`;
-}
-
 export const siteMeta = {
   name: "Skyler Smith",
   role: "Information Systems Student",
@@ -70,7 +59,7 @@ export const siteMeta = {
   linkedin: "https://www.linkedin.com/in/skyler-smith1",
   resume: "/resume/skyler-smith-resume-2026.pdf",
   // Drop your headshot in public/images/ and set the path here, e.g. "/images/skyler.jpg"
-  photo: withBasePath("/images/about/skylerbeach.JPG"),
+  photo: "/images/about/skylerbeach.JPG",
 };
 
 export const heroHighlights = [
@@ -125,7 +114,7 @@ export const featuredProjects: FeaturedProject[] = [
     media: [
       {
         type: "image",
-        src: withBasePath("/images/projects/trust-scores/reviewwidget.png"),
+        src: "/images/projects/trust-scores/reviewwidget.png",
         alt: "Trust Scores review widget with verified badge",
         caption:
           "The Trust Scores review widget highlights verified reviewers with a clear badge and hover details.",
@@ -133,7 +122,7 @@ export const featuredProjects: FeaturedProject[] = [
       },
       {
         type: "image",
-        src: withBasePath("/images/projects/trust-scores/trustlabshomepage.png"),
+        src: "/images/projects/trust-scores/trustlabshomepage.png",
         alt: "Trust Scores marketing homepage",
         caption:
           "Marketing homepage that explains how Trust Scores brings trust and verification to online reviews.",
@@ -141,9 +130,7 @@ export const featuredProjects: FeaturedProject[] = [
       },
       {
         type: "image",
-        src: withBasePath(
-          "/images/projects/trust-scores/trustlabsfaceverification.png",
-        ),
+        src: "/images/projects/trust-scores/trustlabsfaceverification.png",
         alt: "Trust Scores face verification flow",
         caption:
           "The face verification flow that keeps identity checks fast while staying production-ready.",
@@ -225,7 +212,7 @@ export const featuredProjects: FeaturedProject[] = [
     media: [
       {
         type: "image",
-        src: withBasePath("/images/projects/ella-rises/elladashboard.png"),
+        src: "/images/projects/ella-rises/elladashboard.png",
         alt: "Ella Rises management dashboard",
         caption:
           "The Ella Rises management dashboard surfaces donation trends, survey scores, and key milestones at a glance.",
@@ -233,7 +220,7 @@ export const featuredProjects: FeaturedProject[] = [
       },
       {
         type: "image",
-        src: withBasePath("/images/projects/ella-rises/homepageEllarises.png"),
+        src: "/images/projects/ella-rises/homepageEllarises.png",
         alt: "Ella Rises public site homepage",
         caption:
           "Public-facing homepage experience that introduces Ella Rises and connects visitors to impact stories.",
@@ -241,7 +228,7 @@ export const featuredProjects: FeaturedProject[] = [
       },
       {
         type: "image",
-        src: withBasePath("/images/projects/ella-rises/ellaaiassistant.png"),
+        src: "/images/projects/ella-rises/ellaaiassistant.png",
         alt: "Ella Rises AI assistant screen",
         caption:
           "Custom AI assistant view that turns data into conversational insights for nonprofit leaders.",
@@ -249,7 +236,7 @@ export const featuredProjects: FeaturedProject[] = [
       },
       {
         type: "image",
-        src: withBasePath("/images/projects/ella-rises/myteam.jpeg"),
+        src: "/images/projects/ella-rises/myteam.jpeg",
         alt: "Ella Rises INTEX team photo",
         caption:
           "Team photo from the BYU IS Core INTEX competition where the Ella Rises project took first place.",
@@ -257,7 +244,7 @@ export const featuredProjects: FeaturedProject[] = [
       },
       {
         type: "image",
-        src: withBasePath("/images/projects/ella-rises/1stplaceteam.jpeg"),
+        src: "/images/projects/ella-rises/1stplaceteam.jpeg",
         alt: "Ella Rises first place award photo",
         caption: "Celebrating the first-place finish for the Ella Rises INTEX project.",
         placeholder: "First-place award image",
