@@ -35,8 +35,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="grid-sheen absolute inset-0" />
       </div>
       <SiteHeader />
-      <main className="mx-auto flex max-w-6xl flex-col gap-10 px-6 py-8 lg:px-8 lg:py-10">
-        <section className="section-shell px-6 py-14 sm:px-10 lg:px-14">
+      <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-4 sm:gap-10 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+        <section className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
           <Button asChild variant="ghost" className="mb-8 px-0">
             <Link href="/">
               <ArrowLeft className="h-4 w-4" />
@@ -79,8 +79,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </section>
 
-        <section className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="section-shell px-6 py-14 sm:px-10 lg:px-12">
+        <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
+          <div className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-12">
             <SectionHeading
               eyebrow="Case Study"
               title="What needed to be solved."
@@ -106,7 +106,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           </div>
 
-          <div className="section-shell px-6 py-14 sm:px-10 lg:px-12">
+          <div className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-12">
             <SectionHeading
               eyebrow="Media"
               title="Designed to show screenshots and demos cleanly."
@@ -120,7 +120,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </section>
 
-        <section className="section-shell px-6 py-14 sm:px-10 lg:px-14">
+        <section className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
           <SectionHeading
             eyebrow="Impact Summary"
             title="The most important recruiter-facing takeaways."

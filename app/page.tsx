@@ -27,21 +27,30 @@ import {
 
 const GALLERY_EXCLUDE = new Set(["skylerbeach.JPG", "byulogo.svg"]);
 const GALLERY_RE = /\.(jpe?g|png|gif|webp|mp4|webm)$/i;
+const GALLERY_VIDEO_RE = /\.(mp4|webm)$/i;
 
 export default function Home() {
   const aboutDir = path.join(process.cwd(), "public/images/about");
   const galleryFiles = fs
     .readdirSync(aboutDir)
     .filter((f) => GALLERY_RE.test(f) && !GALLERY_EXCLUDE.has(f))
-    .sort();
+    .sort((a, b) => {
+      const aIsVideo = GALLERY_VIDEO_RE.test(a);
+      const bIsVideo = GALLERY_VIDEO_RE.test(b);
+
+      if (aIsVideo && !bIsVideo) return -1;
+      if (!aIsVideo && bIsVideo) return 1;
+
+      return a.localeCompare(b);
+    });
   return (
     <div className="relative">
       <div className="pointer-events-none absolute inset-0 opacity-50">
         <div className="grid-sheen absolute inset-0" />
       </div>
       <SiteHeader />
-      <main className="mx-auto flex max-w-7xl flex-col gap-10 px-6 py-8 lg:px-8 lg:py-10">
-        <section className="section-shell relative isolate overflow-hidden px-6 py-16 sm:px-10 lg:px-14 lg:py-20">
+      <main className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-4 sm:gap-10 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+        <section className="section-shell relative isolate overflow-hidden px-3 py-8 sm:px-8 sm:py-16 lg:px-14 lg:py-20">
           <div className="absolute -right-24 top-10 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(87,153,123,0.45),transparent_72%)] blur-3xl" />
           <div className="absolute left-0 top-0 h-full w-full bg-[linear-gradient(125deg,rgba(255,255,255,0.06),transparent_35%,transparent_65%,rgba(135,191,255,0.08))]" />
           <div className="relative grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
@@ -96,7 +105,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="projects" className="section-shell px-6 py-14 sm:px-10 lg:px-14">
+        <section id="projects" className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
           <Reveal>
             <SectionHeading
               eyebrow="Featured Work"
@@ -149,7 +158,7 @@ export default function Home() {
         </section>
 
         <Reveal>
-          <div className="section-shell px-6 py-10 sm:px-10 lg:px-14">
+          <div className="section-shell px-3 py-6 sm:px-8 sm:py-10 lg:px-14">
             <div className="flex items-center gap-3 mb-8 text-sm uppercase tracking-[0.3em] text-white/50">
               <Mountain className="h-4 w-4" />
               Notable achievements and experience
@@ -159,7 +168,7 @@ export default function Home() {
         </Reveal>
 
         <section id="experience" className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="section-shell px-6 py-14 sm:px-10 lg:px-14">
+          <div className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
             <Reveal>
               <SectionHeading
                 eyebrow="Experience"
@@ -196,7 +205,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col gap-10">
-            <section className="section-shell px-6 py-14 sm:px-10 lg:px-14">
+            <section className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
               <Reveal>
                 <SectionHeading
                   eyebrow="Education"
@@ -228,7 +237,7 @@ export default function Home() {
               </Reveal>
             </section>
 
-            <section className="section-shell px-6 py-14 sm:px-10 lg:px-14">
+            <section className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
               <Reveal>
                 <SectionHeading
                   eyebrow="Tools and Skills"
@@ -258,7 +267,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="section-shell px-6 py-10 sm:px-10 lg:px-14">
+        <section id="about" className="section-shell px-3 py-6 sm:px-8 sm:py-10 lg:px-14">
           <Reveal delay={0.12}>
             <div className="relative mt-4 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 sm:p-6">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(145,223,182,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(113,149,211,0.18),transparent_32%)]" />
@@ -267,8 +276,8 @@ export default function Home() {
           </Reveal>
         </section>
 
-        <section id="interests" className="grid gap-10 lg:grid-cols-[1fr_1fr]">
-          <div className="section-shell px-6 py-14 sm:px-10 lg:px-14">
+        <section id="interests" className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:gap-10">
+          <div className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
             <Reveal>
               <SectionHeading
                 eyebrow="Beyond the Headline"
@@ -296,7 +305,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="section-shell px-6 py-14 sm:px-10 lg:px-14">
+          <div className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
             <Reveal>
               <SectionHeading
                 eyebrow="Life Outside Work"
@@ -320,7 +329,7 @@ export default function Home() {
 
         <section
           id="contact"
-          className="section-shell overflow-hidden px-6 py-14 sm:px-10 lg:px-14"
+          className="section-shell overflow-hidden px-3 py-8 sm:px-8 sm:py-14 lg:px-14"
         >
           <Reveal>
             <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
