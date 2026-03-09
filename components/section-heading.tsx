@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 type SectionHeadingProps = {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
 };
 
 export function SectionHeading({
@@ -17,9 +17,11 @@ export function SectionHeading({
       <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
         {title}
       </h2>
-      <p className="mt-4 text-base leading-7 text-white/70 sm:text-lg">
-        {description}
-      </p>
+      {description ? (
+        <p className="mt-4 text-base leading-7 text-white/70 sm:text-lg">
+          {description}
+        </p>
+      ) : null}
     </div>
   );
 }
