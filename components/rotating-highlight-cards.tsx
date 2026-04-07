@@ -158,7 +158,7 @@ export function RotatingHighlightCards({
           return (
             <div
               key={index}
-              className="relative flex h-44 flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5"
+              className="relative flex h-44 flex-col overflow-hidden border-t-2 border-[rgba(148,213,174,0.2)] bg-white/[0.02] p-5"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
@@ -176,9 +176,7 @@ export function RotatingHighlightCards({
                     <p className="font-display text-4xl font-semibold text-white">
                       {card.value}
                     </p>
-                    <div className="rounded-full border border-white/12 bg-white/8 p-2">
-                      <Icon className="h-4 w-4 text-[rgba(148,213,174,0.92)]" />
-                    </div>
+                    <Icon className="h-5 w-5 text-[rgba(148,213,174,0.65)]" />
                   </div>
                   <p className={getDetailClassName(card.detail)}>
                     {card.detail}

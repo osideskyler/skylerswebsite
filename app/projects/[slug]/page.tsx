@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 import { ProjectMediaFrame } from "@/components/project-media";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { featuredProjects, siteMeta } from "@/content/site-data";
 
@@ -87,7 +86,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="grid-sheen absolute inset-0" />
       </div>
       <SiteHeader />
-      <main className="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-4 sm:gap-10 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+      <main className="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+
+        {/* ── HEADER ── */}
         <section className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
           <Button asChild variant="ghost" className="mb-8 px-0">
             <Link href="/">
@@ -96,8 +97,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Link>
           </Button>
 
-          <Badge className="mb-4">{project.eyebrow}</Badge>
-          <h1 className="font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          <span className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[rgba(148,213,174,0.85)]">
+            <span className="inline-block h-px w-8 bg-[rgba(148,213,174,0.4)]" />
+            {project.eyebrow}
+          </span>
+          <h1 className="mt-4 font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             {project.title}
           </h1>
           <p className="mt-4 max-w-3xl text-xl leading-8 text-white/76">
@@ -107,58 +111,60 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.summary}
           </p>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-              <p className="text-xs uppercase tracking-[0.28em] text-white/45">Role</p>
-              <p className="mt-3 text-lg font-medium text-white">{project.role}</p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            <div className="border-t border-white/10 pt-4">
+              <p className="text-xs uppercase tracking-[0.25em] text-white/40">Role</p>
+              <p className="mt-2 text-lg font-medium text-white">{project.role}</p>
             </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
-              <p className="text-xs uppercase tracking-[0.28em] text-white/45">
-                Timeline
+            <div className="border-t border-white/10 pt-4">
+              <p className="text-xs uppercase tracking-[0.25em] text-white/40">Timeline</p>
+              <p className="mt-2 text-lg font-medium text-white">{project.timeline}</p>
+            </div>
+            <div className="border-t border-white/10 pt-4">
+              <p className="text-xs uppercase tracking-[0.25em] text-white/40">Tech</p>
+              <p className="mt-2 font-mono text-sm leading-6 text-white/55">
+                {project.tech.join("  ·  ")}
               </p>
-              <p className="mt-3 text-lg font-medium text-white">{project.timeline}</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 md:col-span-2">
-              <p className="text-xs uppercase tracking-[0.28em] text-white/45">Tech</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {project.tech.map((item) => (
-                  <Badge key={item} className="tracking-[0.08em] normal-case text-white/72">
-                    {item}
-                  </Badge>
-                ))}
-              </div>
             </div>
           </div>
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
-          <div className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-12">
-            <SectionHeading
-              eyebrow="Case Study"
-              title="What needed to be solved."
-              description={project.problem}
-            />
-            <div className="mt-10 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6">
-              <p className="text-sm uppercase tracking-[0.28em] text-white/45">
+        {/* ── CASE STUDY + MEDIA ── */}
+        <section className="mt-10 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="space-y-0">
+            <div className="border-t border-white/8 pt-10">
+              <SectionHeading
+                eyebrow="Case Study"
+                title="What needed to be solved."
+                description={project.problem}
+              />
+            </div>
+
+            <div className="mt-10 border-l-2 border-[rgba(148,213,174,0.3)] pl-6">
+              <p className="text-xs uppercase tracking-[0.25em] text-white/40">
                 Solution approach
               </p>
-              <p className="mt-4 text-base leading-7 text-white/72">
+              <p className="mt-4 text-base leading-7 text-white/70">
                 {project.solution}
               </p>
             </div>
-            <div className="mt-6 rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6">
-              <p className="text-sm uppercase tracking-[0.28em] text-white/45">
+
+            <div className="mt-8 border-l-2 border-white/10 pl-6">
+              <p className="text-xs uppercase tracking-[0.25em] text-white/40">
                 Outcomes
               </p>
-              <ul className="mt-4 space-y-2 text-sm leading-6 text-white/72">
+              <ul className="mt-4 space-y-2 text-sm leading-6 text-white/65">
                 {project.outcomes.map((item) => (
-                  <li key={item}>• {item}</li>
+                  <li key={item} className="flex gap-2">
+                    <span className="text-white/20 select-none">—</span>
+                    <span>{item}</span>
+                  </li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <div className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-12">
+          <div className="border-t border-white/8 pt-10">
             <SectionHeading
               eyebrow="Media"
               title="Designed to show screenshots and demos cleanly."
@@ -172,19 +178,23 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </section>
 
-        <section className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
+        {/* ── IMPACT ── numbered accent blocks */}
+        <section className="mt-10 border-t border-white/8 pt-10">
           <SectionHeading
             eyebrow="Impact Summary"
             title="The most important recruiter-facing takeaways."
             description="These bullet points are intentionally outcome-driven so a recruiter can scan fast and still understand the value of the project."
           />
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {project.impact.map((item) => (
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {project.impact.map((item, i) => (
               <div
                 key={item}
-                className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5"
+                className="border-t-2 border-[rgba(148,213,174,0.2)] pt-4"
               >
-                <p className="text-sm leading-6 text-white/74">{item}</p>
+                <span className="font-display text-3xl font-light text-white/[0.08]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="mt-2 text-sm leading-6 text-white/65">{item}</p>
               </div>
             ))}
           </div>

@@ -78,3 +78,31 @@ a {
   background: linear-gradient(180deg, rgba(9, 16, 24, 0.92), rgba(6, 10, 16, 0.92));
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
 }
+
+@keyframes skills-marquee-rtl {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.skills-marquee-track {
+  animation: skills-marquee-rtl var(--marquee-duration, 56s) linear infinite;
+}
+
+.skills-marquee-duration-a {
+  --marquee-duration: 52s;
+}
+
+.skills-marquee-duration-b {
+  --marquee-duration: 68s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-marquee-track {
+    animation: none;
+    transform: none;
+  }
+}

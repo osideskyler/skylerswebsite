@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Outfit, Cormorant } from "next/font/google";
 
 import "./globals.css";
 
-const inter = Inter({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-sans",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const cormorant = Cormorant({
   subsets: ["latin"],
   variable: "--font-display",
 });
@@ -76,7 +76,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+      <body className={`${outfit.variable} ${cormorant.variable} antialiased`}>
         {children}
       </body>
     </html>
