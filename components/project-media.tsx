@@ -1,6 +1,7 @@
 import { Play, Image as ImageIcon } from "lucide-react";
 import Image from "next/image";
 
+import { Tilt } from "@/components/fx/tilt";
 import type { ProjectMedia } from "@/content/site-data";
 import { cn } from "@/lib/utils";
 
@@ -13,10 +14,10 @@ export function ProjectMediaFrame({ item, className }: ProjectMediaProps) {
   const isVideo = item.type === "video";
 
   return (
+    <Tilt className={className} max={5} radiusClassName="rounded-[2rem]">
     <div
       className={cn(
         "group relative overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(145deg,rgba(20,32,46,0.92),rgba(7,11,18,0.98))] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.45)]",
-        className,
       )}
     >
       <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(87,153,123,0.25),transparent_40%),linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]">
@@ -59,5 +60,6 @@ export function ProjectMediaFrame({ item, className }: ProjectMediaProps) {
       </div>
       <p className="mt-4 text-sm leading-6 text-white/65">{item.caption}</p>
     </div>
+    </Tilt>
   );
 }

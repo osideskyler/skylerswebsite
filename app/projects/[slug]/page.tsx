@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { ProjectMediaFrame } from "@/components/project-media";
+import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
 import { Button } from "@/components/ui/button";
@@ -167,12 +168,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <div className="border-t border-white/8 pt-10">
             <SectionHeading
               eyebrow="Media"
-              title="Designed to show screenshots and demos cleanly."
-              description="These slots are ready for your real assets. Add images or videos into `public/images` and `public/videos`, then point the file paths in `content/site-data.ts` to them."
+              title="Inside the product."
+              description="Screenshots and demos from the actual build."
             />
             <div className="mt-10 grid gap-6">
-              {project.media.map((item) => (
-                <ProjectMediaFrame key={`${project.slug}-${item.alt}`} item={item} />
+              {project.media.map((item, index) => (
+                <Reveal key={`${project.slug}-${item.alt}`} delay={index * 0.06}>
+                  <ProjectMediaFrame item={item} />
+                </Reveal>
               ))}
             </div>
           </div>
@@ -182,20 +185,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <section className="mt-10 border-t border-white/8 pt-10">
           <SectionHeading
             eyebrow="Impact Summary"
-            title="The most important recruiter-facing takeaways."
-            description="These bullet points are intentionally outcome-driven so a recruiter can scan fast and still understand the value of the project."
+            title="What this project delivered."
+            description="The outcomes that mattered, at a glance."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {project.impact.map((item, i) => (
-              <div
-                key={item}
-                className="border-t-2 border-[rgba(148,213,174,0.2)] pt-4"
-              >
-                <span className="font-display text-3xl font-light text-white/[0.08]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-2 text-sm leading-6 text-white/65">{item}</p>
-              </div>
+              <Reveal key={item} delay={i * 0.08}>
+                <div className="h-full border-t-2 border-[rgba(148,213,174,0.2)] pt-4 transition-colors duration-300 hover:border-[rgba(148,213,174,0.45)]">
+                  <span className="font-display text-3xl font-light text-white/[0.08]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-2 text-sm leading-6 text-white/65">{item}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
           <div className="mt-10">

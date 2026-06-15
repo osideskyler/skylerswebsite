@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { StatCounter } from "@/components/stat-counter";
 import type {
   ResumeHighlightCard,
   ResumeHighlightIcon,
@@ -158,7 +159,7 @@ export function RotatingHighlightCards({
           return (
             <div
               key={index}
-              className="relative flex h-44 flex-col overflow-hidden border-t-2 border-[rgba(148,213,174,0.2)] bg-white/[0.02] p-5"
+              className="relative flex h-44 flex-col overflow-hidden border-t-2 border-[rgba(148,213,174,0.2)] bg-white/[0.02] p-5 transition-[transform,background-color,border-color] duration-300 hover:-translate-y-1 hover:border-[rgba(148,213,174,0.45)] hover:bg-white/[0.05]"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
@@ -174,7 +175,7 @@ export function RotatingHighlightCards({
                   </p>
                   <div className="mt-2 flex items-center justify-between gap-3">
                     <p className="font-display text-4xl font-semibold text-white">
-                      {card.value}
+                      <StatCounter value={card.value} duration={0.9} />
                     </p>
                     <Icon className="h-5 w-5 text-[rgba(148,213,174,0.65)]" />
                   </div>
