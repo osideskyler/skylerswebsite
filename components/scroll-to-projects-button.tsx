@@ -19,7 +19,7 @@ export function ScrollToProjectsButton() {
   return (
     <Button asChild size="lg" variant="light">
       <Link href="#projects" onClick={handleClick} className="flex items-center gap-2">
-        Explore projects
+        Explore work
         <ArrowRight className="h-4 w-4" />
       </Link>
     </Button>

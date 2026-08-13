@@ -90,7 +90,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <main className="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
 
         {/* ── HEADER ── */}
-        <section className="section-shell px-3 py-8 sm:px-8 sm:py-14 lg:px-14">
+        <section className="px-1 py-8 sm:py-12">
           <Button asChild variant="ghost" className="mb-8 px-0">
             <Link href="/">
               <ArrowLeft className="h-4 w-4" />
@@ -108,32 +108,52 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <p className="mt-4 max-w-3xl text-xl leading-8 text-white/76">
             {project.oneLiner}
           </p>
-          <p className="mt-6 max-w-3xl text-base leading-7 text-white/64">
-            {project.summary}
-          </p>
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
-            <div className="border-t border-white/10 pt-4">
-              <p className="text-xs uppercase tracking-[0.25em] text-white/40">Role</p>
-              <p className="mt-2 text-lg font-medium text-white">{project.role}</p>
-            </div>
-            <div className="border-t border-white/10 pt-4">
-              <p className="text-xs uppercase tracking-[0.25em] text-white/40">Timeline</p>
-              <p className="mt-2 text-lg font-medium text-white">{project.timeline}</p>
-            </div>
-            <div className="border-t border-white/10 pt-4">
-              <p className="text-xs uppercase tracking-[0.25em] text-white/40">Tech</p>
-              <p className="mt-2 font-mono text-sm leading-6 text-white/55">
-                {project.tech.join("  ·  ")}
-              </p>
-            </div>
-          </div>
         </section>
 
+        {project.media[0] ? (
+          <div className="mb-10">
+            <ProjectMediaFrame item={project.media[0]} compact />
+          </div>
+        ) : null}
+
+        <div className="grid gap-6 border-t border-white/10 py-8 sm:grid-cols-3">
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/40">Role</p>
+            <p className="mt-2 text-lg font-medium text-white">{project.role}</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/40">Timeline</p>
+            <p className="mt-2 text-lg font-medium text-white">{project.timeline}</p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.25em] text-white/40">Tech</p>
+            <p className="mt-2 font-mono text-sm leading-6 text-white/55">
+              {project.tech.join("  ·  ")}
+            </p>
+          </div>
+        </div>
+
         {/* ── CASE STUDY + MEDIA ── */}
-        <section className="mt-10 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-0">
-            <div className="border-t border-white/8 pt-10">
+        <section className="mt-4 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="space-y-6">
+            <SectionHeading
+              eyebrow="Inside the product"
+              title="Screenshots and demos from the build."
+            />
+            <div className="grid gap-6">
+              {project.media
+                .slice(1)
+                .filter((item) => item.src)
+                .map((item, index) => (
+                  <Reveal key={`${project.slug}-${item.alt}`} delay={index * 0.06}>
+                    <ProjectMediaFrame item={item} compact />
+                  </Reveal>
+                ))}
+            </div>
+          </div>
+
+          <div className="space-y-0 lg:order-first">
+            <div className="border-t border-white/8 pt-10 lg:border-t-0 lg:pt-0">
               <SectionHeading
                 eyebrow="Case Study"
                 title="What needed to be solved."
@@ -141,7 +161,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               />
             </div>
 
-            <div className="mt-10 border-l-2 border-[rgba(148,213,174,0.3)] pl-6">
+            <div className="mt-10 pl-6">
               <p className="text-xs uppercase tracking-[0.25em] text-white/40">
                 Solution approach
               </p>
@@ -150,7 +170,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </p>
             </div>
 
-            <div className="mt-8 border-l-2 border-white/10 pl-6">
+            <div className="mt-8 pl-6">
               <p className="text-xs uppercase tracking-[0.25em] text-white/40">
                 Outcomes
               </p>
@@ -164,38 +184,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               </ul>
             </div>
           </div>
-
-          <div className="border-t border-white/8 pt-10">
-            <SectionHeading
-              eyebrow="Media"
-              title="Inside the product."
-              description="Screenshots and demos from the actual build."
-            />
-            <div className="mt-10 grid gap-6">
-              {project.media.map((item, index) => (
-                <Reveal key={`${project.slug}-${item.alt}`} delay={index * 0.06}>
-                  <ProjectMediaFrame item={item} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
         </section>
 
-        {/* ── IMPACT ── numbered accent blocks */}
+        {/* ── IMPACT ── */}
         <section className="mt-10 border-t border-white/8 pt-10">
           <SectionHeading
-            eyebrow="Impact Summary"
+            eyebrow="Impact"
             title="What this project delivered."
-            description="The outcomes that mattered, at a glance."
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {project.impact.map((item, i) => (
               <Reveal key={item} delay={i * 0.08}>
-                <div className="h-full border-t-2 border-[rgba(148,213,174,0.2)] pt-4 transition-colors duration-300 hover:border-[rgba(148,213,174,0.45)]">
-                  <span className="font-display text-3xl font-light text-white/[0.08]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="mt-2 text-sm leading-6 text-white/65">{item}</p>
+                <div className="h-full border-t-2 border-[rgba(148,213,174,0.2)] pt-4">
+                  <p className="text-sm leading-6 text-white/65">{item}</p>
                 </div>
               </Reveal>
             ))}

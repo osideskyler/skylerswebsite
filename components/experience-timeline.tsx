@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 type ExperienceItem = {
   title: string;
@@ -27,7 +26,11 @@ function TimelineEntry({
       transition={{ duration: 0.55, delay: index * 0.05, ease: "easeOut" }}
     >
       <motion.div
-        className="absolute left-0 top-[0.45rem] h-[15px] w-[15px] rounded-full border-2 border-[rgba(148,213,174,0.6)] bg-[hsl(var(--background))]"
+        data-ridge
+        data-ridge-side="anchor"
+        data-ridge-y="0.5"
+        data-ridge-inset="7"
+        className="absolute left-0 top-[0.45rem] z-[13] h-[15px] w-[15px] rounded-full border-2 border-[rgba(148,213,174,0.6)] bg-[hsl(var(--background))]"
         style={{ boxShadow: "0 0 16px rgba(148,213,174,0.35)" }}
         initial={{ scale: 0 }}
         whileInView={{ scale: 1 }}
@@ -57,23 +60,10 @@ function TimelineEntry({
   );
 }
 
-/** Experience timeline whose accent line draws itself as you scroll. */
+/** Experience entries. The page ridge is the timeline spine. */
 export function ExperienceTimeline({ items }: { items: ExperienceItem[] }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.78", "end 0.55"],
-  });
-  const scaleY = useSpring(scrollYProgress, { stiffness: 90, damping: 22 });
-
   return (
-    <div ref={ref} className="relative mt-12">
-      <div className="absolute bottom-2 left-[7px] top-2 w-px bg-white/10" />
-      <motion.div
-        aria-hidden
-        className="absolute bottom-2 left-[7px] top-2 w-px origin-top bg-[linear-gradient(180deg,#9ad5ae,#78bae6)]"
-        style={{ scaleY }}
-      />
+    <div className="relative mt-12">
       <div className="space-y-10">
         {items.map((experience, index) => (
           <TimelineEntry

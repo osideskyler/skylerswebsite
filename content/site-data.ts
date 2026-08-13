@@ -140,7 +140,7 @@ export const rotatingResumeCards: ResumeHighlightCard[] = [
 export const featuredProjects: FeaturedProject[] = [
   {
     slug: "trust-scores-app",
-    eyebrow: "Flagship Project",
+    eyebrow: "Shipped at BYU",
     title: "Trust Scores App",
     oneLiner:
       "A review verification platform designed to make identity checks fast, affordable, and enterprise-ready.",
@@ -198,7 +198,7 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     slug: "redo-claims-dashboard",
-    eyebrow: "Current Work",
+    eyebrow: "Built at Redo",
     title: "Redo Claims Dashboard",
     oneLiner:
       "An internal analytics and automation dashboard supporting a high-value claims pipeline.",
@@ -240,7 +240,7 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     slug: "ella-rises-intex",
-    eyebrow: "Competition Project",
+    eyebrow: "First place · INTEX",
     title: "Ella Rises INTEX Project",
     oneLiner:
       "A first-place data and AI experience built to help a nonprofit surface meaningful insights.",

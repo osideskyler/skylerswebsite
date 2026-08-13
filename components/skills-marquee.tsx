@@ -1,4 +1,3 @@
-import { ScrollSkew } from "@/components/fx/scroll-skew";
 import { cn } from "@/lib/utils";
 import type { SkillGroup } from "@/content/site-data";
 
@@ -99,10 +98,10 @@ export function SkillsMarquee({ groups }: { groups: SkillGroup[] }) {
       <div className="section-shell w-full min-w-0 max-w-full overflow-hidden border-[rgba(148,213,174,0.12)] bg-[linear-gradient(165deg,rgba(12,18,26,0.95),rgba(6,10,16,0.88))] px-0 py-6 sm:py-8">
         <div className="pointer-events-none absolute inset-0 rounded-[inherit] opacity-[0.45] [background-image:radial-gradient(circle_at_20%_0%,rgba(148,213,174,0.09),transparent_45%),radial-gradient(circle_at_80%_100%,rgba(120,186,230,0.06),transparent_40%)]" />
 
-        <ScrollSkew className="relative flex min-w-0 flex-col gap-5 sm:gap-6">
+        <div className="relative flex min-w-0 flex-col gap-5 sm:gap-6">
           <MarqueeRow pills={pills} durationClass="skills-marquee-duration-a" />
           <MarqueeRow pills={altOrder} durationClass="skills-marquee-duration-b" />
-        </ScrollSkew>
+        </div>
       </div>
     </div>
   );

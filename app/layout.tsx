@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Cormorant } from "next/font/google";
 
-import { ScrollProgress } from "@/components/fx/scroll-progress";
-
 import "./globals.css";
 
 const outfit = Outfit({
@@ -79,7 +77,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${outfit.variable} ${cormorant.variable} antialiased`}>
-        <ScrollProgress />
         <div className="noise-overlay" aria-hidden />
         {children}
       </body>
