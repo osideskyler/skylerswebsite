@@ -83,9 +83,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="relative">
-      <div className="pointer-events-none absolute inset-0 opacity-45">
-        <div className="grid-sheen absolute inset-0" />
-      </div>
       <SiteHeader />
       <main className="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
 

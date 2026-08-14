@@ -9,7 +9,6 @@ import { CopyEmailButton } from "@/components/copy-email-button";
 import { ExperienceTimeline } from "@/components/experience-timeline";
 import { Magnetic } from "@/components/fx/magnetic";
 import { Parallax } from "@/components/fx/parallax";
-import { RidgeCanvas } from "@/components/fx/ridge-canvas";
 import { Tilt } from "@/components/fx/tilt";
 import { WordReveal } from "@/components/fx/word-reveal";
 import { LifeGallery } from "@/components/life-gallery";
@@ -87,30 +86,11 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="pointer-events-none absolute inset-0 opacity-50">
-        <div className="grid-sheen absolute inset-0" />
-      </div>
-      {/* Ambient orbs drifting at their own pace between sections. */}
-      <Parallax
-        speed={-0.6}
-        className="pointer-events-none absolute left-[-12rem] top-[150vh] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(120,186,230,0.16),transparent_70%)] blur-3xl"
-      />
-      <Parallax
-        speed={-0.45}
-        className="pointer-events-none absolute right-[-10rem] top-[300vh] h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(circle,rgba(148,213,174,0.14),transparent_70%)] blur-3xl"
-      />
-      <Parallax
-        speed={-0.7}
-        className="pointer-events-none absolute left-[8vw] top-[470vh] h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,rgba(120,186,230,0.12),transparent_70%)] blur-3xl"
-      />
       <SiteHeader />
       <main className="mx-auto min-w-0 max-w-7xl overflow-x-clip px-4 py-4 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
 
         {/* ── HERO ── section-shell container */}
         <section className="section-shell relative isolate overflow-hidden px-3 py-8 sm:px-8 sm:py-16 lg:px-14 lg:py-20">
-          <div className="absolute -right-24 top-10 h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(87,153,123,0.45),transparent_72%)] blur-3xl" />
-          <div className="absolute left-0 top-0 h-full w-full bg-[linear-gradient(125deg,rgba(255,255,255,0.06),transparent_35%,transparent_65%,rgba(135,191,255,0.08))]" />
-          <RidgeCanvas className="pointer-events-none absolute inset-x-0 bottom-0 h-[72%] w-full opacity-80" />
           <div className="relative grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
             <Parallax speed={0.18} fade>
             <Reveal>

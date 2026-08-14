@@ -53,10 +53,6 @@ function getInitialVisibleCards(
   return cards.slice(0, visibleCount);
 }
 
-function getRandomIndex(length: number) {
-  return Math.floor(Math.random() * length);
-}
-
 function getSlotIndex(step: number, visibleLength: number): number {
   if (visibleLength === 0) return 0;
 
@@ -90,16 +86,6 @@ export function RotatingHighlightCards({
       slotStep: 0,
     };
   });
-
-  useEffect(() => {
-    const initialVisibleCards = getInitialVisibleCards(cards, slots);
-    setRotationState({
-      visibleCards: initialVisibleCards,
-      queue: cards.slice(initialVisibleCards.length),
-      completedCards: [] as ResumeHighlightCard[],
-      slotStep: 0,
-    });
-  }, [cards, slots]);
 
   useEffect(() => {
     if (cards.length <= visibleCount) {

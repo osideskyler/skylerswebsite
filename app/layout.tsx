@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Cormorant } from "next/font/google";
 
+import { DuskField } from "@/components/fx/dusk-field";
 import { ScrollProgress } from "@/components/fx/scroll-progress";
 
 import "./globals.css";
@@ -78,10 +79,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${cormorant.variable} antialiased`}>
+      <body className={`${outfit.variable} ${cormorant.variable} relative antialiased`}>
+        <DuskField />
         <ScrollProgress />
         <div className="noise-overlay" aria-hidden />
-        {children}
+        <div className="relative z-10">{children}</div>
       </body>
     </html>
   );
