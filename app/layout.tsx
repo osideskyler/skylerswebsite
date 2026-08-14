@@ -3,6 +3,7 @@ import { Outfit, Cormorant } from "next/font/google";
 
 import { DuskField } from "@/components/fx/dusk-field";
 import { ScrollProgress } from "@/components/fx/scroll-progress";
+import { TypewriterProvider } from "@/components/fx/use-typewriter-name";
 
 import "./globals.css";
 
@@ -83,7 +84,9 @@ export default function RootLayout({
         <DuskField />
         <ScrollProgress />
         <div className="noise-overlay" aria-hidden />
-        <div className="relative z-10">{children}</div>
+        <div className="relative z-10">
+          <TypewriterProvider>{children}</TypewriterProvider>
+        </div>
       </body>
     </html>
   );
