@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { TypewriterName } from "@/components/typewriter-name";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -61,7 +60,7 @@ export function SiteHeader() {
           href="/"
           className="text-sm font-semibold uppercase tracking-[0.35em] text-white/85"
         >
-          <TypewriterName />
+          Skyler Smith
         </Link>
         <nav className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => {

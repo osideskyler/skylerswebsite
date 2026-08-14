@@ -141,17 +141,20 @@ html {
 }
 
 .hero-name {
+  display: inline-block;
   background-image: linear-gradient(
     105deg,
     #f4f1ea 0%,
-    #c9dceb 32%,
-    #e0b889 58%,
-    #9bb8ce 82%,
+    #c9dceb 28%,
+    #e0b889 52%,
+    #9bb8ce 76%,
     #f4f1ea 100%
   );
-  background-size: 240% 100%;
+  background-size: 160% 100%;
+  background-position: 20% 50%;
   background-clip: text;
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
   animation: hero-name-shift 40s ease-in-out infinite;
 }
@@ -159,10 +162,10 @@ html {
 @keyframes hero-name-shift {
   0%,
   100% {
-    background-position: 0% 50%;
+    background-position: 10% 50%;
   }
   50% {
-    background-position: 100% 50%;
+    background-position: 90% 50%;
   }
 }
 

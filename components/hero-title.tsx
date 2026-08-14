@@ -6,8 +6,36 @@ type HeroTitleProps = {
   name: string;
 };
 
+function GradientLine({
+  text,
+  placeholder,
+  showCaret,
+  cursorState,
+}: {
+  text: string;
+  placeholder: string;
+  showCaret: boolean;
+  cursorState: ReturnType<typeof useTypewriterName>["cursorState"];
+}) {
+  return (
+    <span className="grid">
+      <span className="invisible col-start-1 row-start-1">{placeholder}</span>
+      <span className="col-start-1 row-start-1">
+        {text ? <span className="hero-name">{text}</span> : null}
+        {showCaret ? (
+          <TypewriterCaret
+            state={cursorState}
+            variant="bar"
+            className="text-[#f4f1ea]"
+          />
+        ) : null}
+      </span>
+    </span>
+  );
+}
+
 /**
- * Oversized stacked name, typed in lockstep with the nav wordmark.
+ * Oversized stacked name, typed in with a dusk wash across each line.
  * Layout is reserved so the photo does not jump while letters arrive.
  */
 export function HeroTitle({ name }: HeroTitleProps) {
@@ -21,34 +49,20 @@ export function HeroTitle({ name }: HeroTitleProps) {
   return (
     <h1
       aria-label={name}
-      className="relative font-display font-medium leading-[0.82] tracking-[-0.045em]"
+      className="font-display font-medium leading-[0.82] tracking-[-0.045em]"
     >
-      <span className="invisible block" aria-hidden>
-        <span className="block">{firstName}</span>
-        <span className="block">{lastName ?? ""}</span>
-      </span>
-      <span className="absolute inset-0" aria-hidden>
-        <span className="block">
-          <span className="hero-name">{first}</span>
-          {onSecondLine ? null : (
-            <TypewriterCaret
-              state={cursorState}
-              variant="bar"
-              className="text-[#f4f1ea]"
-            />
-          )}
-        </span>
-        <span className="block">
-          <span className="hero-name">{second}</span>
-          {onSecondLine ? (
-            <TypewriterCaret
-              state={cursorState}
-              variant="bar"
-              className="text-[#f4f1ea]"
-            />
-          ) : null}
-        </span>
-      </span>
+      <GradientLine
+        text={first}
+        placeholder={firstName ?? ""}
+        showCaret={!onSecondLine}
+        cursorState={cursorState}
+      />
+      <GradientLine
+        text={second}
+        placeholder={lastName ?? ""}
+        showCaret={onSecondLine}
+        cursorState={cursorState}
+      />
     </h1>
   );
 }
