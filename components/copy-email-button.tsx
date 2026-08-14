@@ -1,11 +1,9 @@
 "use client";
 
-import { Check, Copy, Mail } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-import { Button } from "@/components/ui/button";
-
-/** Mailto button paired with a copy-to-clipboard action and feedback. */
+/** Mailto address with a quiet copy-to-clipboard control. */
 export function CopyEmailButton({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
   const timeoutRef = useRef<number | null>(null);
@@ -28,17 +26,16 @@ export function CopyEmailButton({ email }: { email: string }) {
   };
 
   return (
-    <div className="flex items-stretch gap-2">
-      <Button asChild size="lg" variant="light" className="flex-1">
-        <a href={`mailto:${email}`} className="flex items-center gap-2">
-          <Mail className="h-4 w-4" />
-          {email}
-        </a>
-      </Button>
-      <Button
-        size="lg"
-        variant="secondary"
-        className="px-4"
+    <div className="flex items-center gap-3">
+      <a
+        href={`mailto:${email}`}
+        className="font-display text-2xl font-medium tracking-tight text-white transition-colors hover:text-white/80 sm:text-3xl"
+      >
+        {email}
+      </a>
+      <button
+        type="button"
+        className="rounded-full p-2 text-white/35 transition-colors hover:text-white"
         aria-label={copied ? "Email copied" : "Copy email address"}
         onClick={handleCopy}
       >
@@ -47,7 +44,7 @@ export function CopyEmailButton({ email }: { email: string }) {
         ) : (
           <Copy className="h-4 w-4" />
         )}
-      </Button>
+      </button>
     </div>
   );
 }

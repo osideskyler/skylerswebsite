@@ -345,38 +345,27 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── CONTACT ── section-shell bookend */}
-        <section
-          id="contact"
-          className="mt-20 section-shell overflow-hidden px-3 py-8 sm:px-8 sm:py-14 lg:px-14"
-        >
+        {/* ── CONTACT ── quiet closer */}
+        <section id="contact" className="mt-24 border-t border-white/8 pt-16">
           <Reveal>
-            <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-2xl">
-                <span className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[rgba(148,213,174,0.85)]">
-                  <span className="inline-block h-px w-8 bg-[rgba(148,213,174,0.4)]" />
-                  Let&apos;s Connect
-                </span>
-                <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                  Contact <span className="text-gradient">Skyler Smith</span>
-                </h2>
-                <p className="mt-5 text-base leading-7 text-white/70 sm:text-lg">
-                  If you are hiring for product, AI, or software roles, reach out
-                  anytime to connect about opportunities or projects.
-                </p>
-              </div>
-              <div className="flex flex-col gap-3">
-                <CopyEmailButton email={siteMeta.email} />
-                <Button asChild variant="secondary" size="lg">
-                  <Link href={siteMeta.linkedin} target="_blank">
-                    LinkedIn profile
-                  </Link>
-                </Button>
-                <Button asChild variant="secondary" size="lg">
-                  <Link href={siteMeta.resume} target="_blank">
-                    Download resume
-                  </Link>
-                </Button>
+            <SectionHeading title="Contact" />
+            <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+              <CopyEmailButton email={siteMeta.email} />
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm uppercase tracking-[0.22em] text-white/45">
+                <Link
+                  href={siteMeta.linkedin}
+                  target="_blank"
+                  className="transition-colors hover:text-white"
+                >
+                  LinkedIn
+                </Link>
+                <Link
+                  href={siteMeta.resume}
+                  target="_blank"
+                  className="transition-colors hover:text-white"
+                >
+                  Resume
+                </Link>
               </div>
             </div>
           </Reveal>
