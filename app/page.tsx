@@ -7,17 +7,14 @@ import { ArrowRight, ArrowUp, Mountain } from "lucide-react";
 
 import { CopyEmailButton } from "@/components/copy-email-button";
 import { ExperienceTimeline } from "@/components/experience-timeline";
-import { Magnetic } from "@/components/fx/magnetic";
 import { Parallax } from "@/components/fx/parallax";
-import { Tilt } from "@/components/fx/tilt";
-import { WordReveal } from "@/components/fx/word-reveal";
+import { HeroTitle } from "@/components/hero-title";
 import { LifeGallery } from "@/components/life-gallery";
 import { ProjectMediaFrame } from "@/components/project-media";
 import { Reveal } from "@/components/reveal";
 import { RotatingHighlightCards } from "@/components/rotating-highlight-cards";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteHeader } from "@/components/site-header";
-import { ScrollToProjectsButton } from "@/components/scroll-to-projects-button";
 import { SkillsMarquee } from "@/components/skills-marquee";
 import { Button } from "@/components/ui/button";
 import {
@@ -89,97 +86,24 @@ export default function Home() {
       <SiteHeader />
       <main className="mx-auto min-w-0 max-w-7xl overflow-x-clip px-4 py-4 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
 
-        {/* ── HERO ── section-shell container */}
-        <section className="section-shell relative isolate overflow-hidden px-3 py-8 sm:px-8 sm:py-16 lg:px-14 lg:py-20">
-          <div className="relative grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
-            <Parallax speed={0.18} fade>
-            <Reveal>
-              <div className="max-w-3xl">
-                <span className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[rgba(148,213,174,0.85)]">
-                  <span className="inline-block h-px w-8 bg-[rgba(148,213,174,0.4)]" />
-                  Portfolio 2026
-                </span>
-                {siteMeta.role && (
-                  <p className="mt-4 text-sm uppercase tracking-[0.35em] text-white/55">
-                    {siteMeta.role}
-                  </p>
-                )}
-                <h1 className="mt-3 font-display text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-7xl">
-                  <WordReveal text={siteMeta.name} delay={0.1} />
-                </h1>
-                <p className="mt-5 max-w-2xl text-xl leading-8 text-white/78 sm:text-2xl">
-                  <WordReveal
-                    text={siteMeta.headline}
-                    delay={0.3}
-                    accent={["AI-driven"]}
-                  />
-                </p>
-                <p className="mt-4 max-w-2xl text-base leading-7 text-white/68 sm:text-lg">
-                  This Skyler Smith portfolio features AI, product, and software
-                  projects built with a business lens.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Magnetic>
-                    <ScrollToProjectsButton />
-                  </Magnetic>
-                  <Magnetic>
-                    <Button asChild variant="secondary" size="lg">
-                      <Link href={siteMeta.resume} target="_blank">
-                        View resume
-                      </Link>
-                    </Button>
-                  </Magnetic>
-                  <Magnetic>
-                    <Button asChild variant="ghost" size="lg">
-                      <Link href={siteMeta.linkedin} target="_blank">
-                        LinkedIn
-                      </Link>
-                    </Button>
-                  </Magnetic>
-                </div>
+        {/* ── HERO ── name + photo on the dusk field */}
+        <section className="relative flex min-h-[78vh] items-end pb-6 pt-16 sm:min-h-[84vh] sm:pb-10 sm:pt-24">
+          <div className="grid w-full items-end gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] xl:grid-cols-[minmax(0,1fr)_20rem]">
+            <div className="text-[clamp(3.4rem,12vw,9.5rem)]">
+              <HeroTitle name={siteMeta.name} />
+            </div>
+            {siteMeta.photo ? (
+              <div className="relative mx-auto aspect-[3/4] w-full max-w-[16rem] lg:mx-0 lg:max-w-none">
+                <Image
+                  src={siteMeta.photo}
+                  alt={siteMeta.name}
+                  fill
+                  priority
+                  className="object-cover object-top"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#04070d] to-transparent" />
               </div>
-            </Reveal>
-            </Parallax>
-
-            <Parallax speed={0.42} fade>
-            <Reveal delay={0.12}>
-              <Tilt className="w-full max-w-sm mx-auto lg:mx-0" max={5}>
-                <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] aspect-[3/4] w-full">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(145,223,182,0.15),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(113,149,211,0.15),transparent_40%)]" />
-                  {siteMeta.photo ? (
-                    <Image
-                      src={siteMeta.photo}
-                      alt={siteMeta.name}
-                      fill
-                      className="object-cover object-top"
-                    />
-                  ) : (
-                    <div className="flex h-full flex-col items-center justify-center gap-3 text-white/30">
-                      <div className="h-16 w-16 rounded-full border-2 border-dashed border-white/20" />
-                      <p className="text-xs uppercase tracking-[0.25em]">Photo</p>
-                    </div>
-                  )}
-                  <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 rounded-full border border-white/15 bg-[rgba(5,10,16,0.72)] px-3.5 py-2 backdrop-blur-md">
-                    <span className="h-2 w-2 rounded-full bg-[rgb(148,213,174)] [animation:pulse-dot_2.2s_ease-out_infinite]" />
-                    <span className="text-[0.65rem] uppercase tracking-[0.18em] text-white/80">
-                      Open to product &amp; AI roles
-                    </span>
-                  </div>
-                </div>
-              </Tilt>
-            </Reveal>
-            </Parallax>
-          </div>
-          <div className="relative mt-12 hidden justify-center lg:flex">
-            <a
-              href="#projects"
-              className="flex flex-col items-center gap-2 text-[0.65rem] uppercase tracking-[0.3em] text-white/35 transition-colors hover:text-white/70"
-            >
-              <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/25 p-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-[rgba(148,213,174,0.9)] [animation:scroll-dot_1.8s_ease-in-out_infinite]" />
-              </span>
-              Scroll
-            </a>
+            ) : null}
           </div>
         </section>
 
