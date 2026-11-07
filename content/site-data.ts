@@ -271,6 +271,50 @@ export const featuredProjects: FeaturedProject[] = [
     links: [{ label: "Launch the experience", href: "https://brotherofjared.vercel.app" }],
   },
   {
+    slug: "sunrise-intex-ii",
+    eyebrow: "Competition Project",
+    title: "Sunrise (INTEX II)",
+    oneLiner:
+      "A case management and fundraising platform for a nonprofit that runs safehouses for girls recovering from abuse and trafficking.",
+    summary:
+      "For BYU's INTEX II, our team built Sunrise: a public site that tells the organization's story and takes donations, a donor portal, and a staff admin portal for managing residents, case notes, home visits, intervention plans, donors, and social media. Four machine learning services feed risk and wellbeing signals into the dashboard. I built much of the admin portal and the .NET API endpoints behind it.",
+    role: "Full-Stack Developer",
+    timeline: "Apr 2026",
+    impact: [
+      "Built the admin command center: key metrics, residents who need attention, upcoming events, safehouse capacity, recent donations, and ML wellbeing signals on one screen.",
+      "Wrote .NET API endpoints and data entities across residents, donors, donations, and case records.",
+      "Shipped on Azure with a React frontend, .NET API, PostgreSQL, and four Python ML services.",
+    ],
+    tech: ["React", "TypeScript", "Vite", "shadcn/ui", ".NET", "PostgreSQL", "Azure", "FastAPI ML Services"],
+    problem:
+      "The organization runs several safehouses with limited staff. Case workers needed to see which girls were struggling or ready for reintegration, leaders needed to know which donors were at risk of lapsing, and none of it could expose sensitive details about minors.",
+    solution:
+      "We split the system into a React frontend, a .NET API on PostgreSQL, and separate Python services for donor health, resident wellbeing, social media, and public impact. On the admin side I built the dashboard and admin pages: metric cards, a needs-attention list, an upcoming events feed, per-safehouse capacity and incident cards, a recent donations table, and a wellbeing grid that color-codes health, education, engagement, and incident risk for each resident using IDs instead of names.",
+    outcomes: [
+      "Gave staff one place to start the day instead of switching between spreadsheets and forms.",
+      "Turned ML outputs into simple green, yellow, and red signals that non-technical staff can act on.",
+      "Kept resident data de-identified across the dashboard and the public impact pages.",
+    ],
+    media: [
+      {
+        type: "image",
+        src: "/images/projects/sunrise/admin-dashboard.jpg",
+        alt: "Sunrise admin dashboard with metrics, flagged residents, events, safehouses, donations, and wellbeing signals",
+        caption:
+          "The admin dashboard I built, running locally with sample data: metrics, flagged residents, upcoming events, safehouse capacity, donations, and ML wellbeing signals.",
+        placeholder: "Admin dashboard",
+      },
+      {
+        type: "image",
+        src: "/images/projects/sunrise/public-home.jpg",
+        alt: "Sunrise public homepage reading Rebuilding lives. Restoring hope.",
+        caption: "The public homepage, which leads visitors to donate or see the organization's impact.",
+        placeholder: "Public homepage",
+      },
+    ],
+    links: [{ label: "View source", href: "https://github.com/ryanabaldwin/Sunrise" }],
+  },
+  {
     slug: "redo-claims-dashboard",
     eyebrow: "Industry Work",
     title: "Redo Claims Dashboard",
@@ -358,6 +402,20 @@ export const featuredProjects: FeaturedProject[] = [
       },
       {
         type: "image",
+        src: "/images/projects/ella-rises/programs.jpg",
+        alt: "Ella Rises programs page with Ballet Folklorico, Mariachi, STEAM, and Summit tabs",
+        caption: "The programs page, with tabs for each program and its ages, schedule, and audition details.",
+        placeholder: "Programs page",
+      },
+      {
+        type: "image",
+        src: "/images/projects/ella-rises/get-involved.jpg",
+        alt: "Ella Rises get involved page with volunteer, donate, and partner options",
+        caption: "Get Involved routes visitors to volunteering, donating, or partnering with the organization.",
+        placeholder: "Get involved page",
+      },
+      {
+        type: "image",
         src: "/images/projects/ella-rises/myteam.jpeg",
         alt: "Ella Rises INTEX team photo",
         caption: "Our team at the BYU IS Core INTEX competition.",
@@ -403,14 +461,6 @@ export const secondaryProjects: SecondaryProject[] = [
     description:
       "A native macOS push-to-talk dictation app. Hold a key, speak, and cleaned-up text appears in whatever field is focused. Built in Swift with a waveform overlay, Whisper transcription, and an LLM cleanup pass, all in about 15 MB of memory.",
     tags: ["Swift", "macOS", "Speech-to-Text", "LLM"],
-  },
-  {
-    title: "Sunrise (INTEX II)",
-    year: "2026",
-    description:
-      "A case management and fundraising platform for a nonprofit that runs safehouses for survivors of trafficking. I built much of the staff admin dashboard and .NET API endpoints; the team deployed it on Azure alongside four machine learning services for donor health, resident wellbeing, and social media.",
-    tags: ["React", ".NET", "PostgreSQL", "Azure", "ML Services"],
-    links: [{ label: "View source", href: "https://github.com/ryanabaldwin/Sunrise" }],
   },
   {
     title: "Late-Delivery Prediction Pipeline",
