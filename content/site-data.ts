@@ -7,6 +7,11 @@ export type ProjectMedia = {
   placeholder: string;
 };
 
+export type ProjectLink = {
+  label: string;
+  href: string;
+};
+
 export type FeaturedProject = {
   slug: string;
   eyebrow: string;
@@ -21,12 +26,19 @@ export type FeaturedProject = {
   solution: string;
   outcomes: string[];
   media: ProjectMedia[];
+  links?: ProjectLink[];
 };
 
 export type SecondaryProject = {
   title: string;
+  year?: string;
   description: string;
   tags: string[];
+  image?: {
+    src: string;
+    alt: string;
+  };
+  links?: ProjectLink[];
 };
 
 export type ExperienceItem = {
@@ -159,23 +171,24 @@ export const featuredProjects: FeaturedProject[] = [
     oneLiner:
       "A review verification platform designed to make identity checks fast, affordable, and enterprise-ready.",
     summary:
-      "Built as a product engineering project at BYU, Trust Scores combined facial recognition, verification flows, and scalable architecture to validate online reviews without creating heavy user friction.",
+      "Built as a product engineering project in a BYU research lab, Trust Scores combines facial recognition, OAuth sign-in, and a scalable Go and AWS backend to prove that the person leaving a review is real, without making them jump through hoops. I also built Thread Lab, a full demo storefront that shows the verified-review widget working inside a realistic shopping experience.",
     role: "Product Engineer",
     timeline: "Jun 2025 - Oct 2025",
     impact: [
       "Reduced verification cost per user by 98%.",
-      "Created a verification experience that took roughly 10 seconds.",
-      "Translated research goals into a production-minded system with room to scale.",
+      "Created a verification experience that takes roughly 10 seconds.",
+      "Turned a professor's research goals into a production-minded system with an SDK direction for enterprise scale.",
     ],
-    tech: ["React", "Go", "AWS", "Supabase", "OAuth", "Facial Recognition"],
+    tech: ["React", "Next.js", "TypeScript", "Go", "AWS", "Supabase", "OAuth", "Facial Recognition"],
     problem:
-      "Review platforms need trust, but most verification systems either create too much friction or cost too much to run at scale.",
+      "Online reviews drive buying decisions, but anyone can post one. Most identity verification tools either add too much friction for a quick review or cost too much per user to run at the volume a review platform needs.",
     solution:
-      "I helped engineer a lightweight full-stack verification flow that balanced identity confidence, speed, and enterprise viability.",
+      "I helped engineer a lightweight full-stack flow: reviewers sign in with OAuth, complete a short face check, and earn a verified badge that shows up directly on the review. The backend was built in Go on AWS with Supabase for data, and the widget was packaged so a store could drop it in. To show it in context, I built Thread Lab, a Next.js 15 storefront with product listings, filters, a persistent cart, checkout, and a full reviews system where verified reviews stand out.",
     outcomes: [
-      "Built a modern web experience around identity verification.",
-      "Designed for future enterprise use with a scalable SDK-oriented direction.",
-      "Focused on reducing friction so verification felt fast rather than burdensome.",
+      "Delivered a verification flow fast enough that it feels like part of writing a review, not a separate chore.",
+      "Cut the per-user cost of verification by 98% compared to the original approach.",
+      "Built a demo storefront that let the lab show partners how verified reviews look and behave on a real store.",
+      "Designed the system with an SDK-oriented direction so it could scale to enterprise customers.",
     ],
     media: [
       {
@@ -183,72 +196,113 @@ export const featuredProjects: FeaturedProject[] = [
         src: "/images/projects/trust-scores/reviewwidget.png",
         alt: "Trust Scores review widget with verified badge",
         caption:
-          "The Trust Scores review widget highlights verified reviewers with a clear badge and hover details.",
+          "The review widget highlights verified reviewers with a clear badge and hover details, ready to drop into any storefront.",
         placeholder: "Review widget hero image",
-      },
-      {
-        type: "image",
-        src: "/images/projects/trust-scores/trustlabshomepage.png",
-        alt: "Trust Scores marketing homepage",
-        caption:
-          "Marketing homepage that explains how Trust Scores brings trust and verification to online reviews.",
-        placeholder: "Marketing homepage image",
       },
       {
         type: "image",
         src: "/images/projects/trust-scores/trustlabsfaceverification.png",
         alt: "Trust Scores face verification flow",
         caption:
-          "The face verification flow that keeps identity checks fast while staying production-ready.",
+          "The face verification step: a short guided capture that confirms a real person in about 10 seconds.",
         placeholder: "Face verification flow image",
       },
       {
-        type: "video",
-        alt: "Trust Scores demo video",
-        caption: "Drop in your best product walkthrough or verification flow demo.",
-        placeholder: "Product demo video slot",
+        type: "image",
+        src: "/images/projects/trust-scores/trustlabshomepage.png",
+        alt: "Trust Scores marketing homepage",
+        caption:
+          "Marketing homepage that explains how Trust Scores brings identity verification to online reviews.",
+        placeholder: "Marketing homepage image",
       },
     ],
+  },
+  {
+    slug: "barges-of-the-jaredites",
+    eyebrow: "Interactive 3D",
+    title: "The Barges of the Jaredites",
+    oneLiner:
+      "An explorable 3D world in the browser that retells Ether 2-6: walk the seashore, follow the story, and launch eight barges into the storm.",
+    summary:
+      "A personal build that turns a scripture account into a place you can stand in. The seashore of Moriancumer is generated in three.js with a working camp, flocks, an animated ocean, and weather. A 16-chapter story mode moves the camera through the account, steps into close-up scenes, and pairs each chapter with the verse it comes from.",
+    role: "Solo Designer & Developer",
+    timeline: "Sep 2026 - Nov 2026",
+    impact: [
+      "A 16-chapter guided story with close-up scenes, plus free orbit, first-person walking, and a cinematic tour.",
+      "Procedural terrain, ocean, sky, and textures generated from one seeded random stream, with Blender-scripted models.",
+      "Automatic quality tiers and a frame-time test harness keep it smooth on laptops and phones.",
+    ],
+    tech: ["three.js", "JavaScript", "Vite", "Blender (Python)", "Web Audio", "Playwright", "Vercel"],
+    problem:
+      "Stories like the barges in Ether are hard to picture from text alone: eight vessels \"tight like unto a dish,\" sixteen stones touched to give light, and a crossing through a furious wind. I wanted a way for someone to stand on that shore and watch it unfold.",
+    solution:
+      "I built a real-time scene in three.js. The terrain, waves, clouds, vegetation, camp life, and procedural textures all come from a single seeded random stream, so the world is consistent on every visit. The barges and people are modeled from Blender scripts, a time-of-day and storm system drives lighting, rain, lightning, and sound, and the story mode scripts camera moves, barge launches, and scene changes for each chapter.",
+    outcomes: [
+      "Shipped publicly on Vercel with analytics, share previews, and a no-setup, open-in-the-browser experience.",
+      "Built a Playwright performance harness that measures real frame times for each quality level and a throttled phone profile.",
+      "Iterated through several release versions focused on natural motion, walk-in story scenes, recorded music, and first-visit UX.",
+    ],
+    media: [
+      {
+        type: "image",
+        src: "/images/projects/barges/explore-shoreline.jpg",
+        alt: "3D view of the seashore with barges on cradles, a camp, and sea stacks offshore",
+        caption:
+          "Explore mode: the shoreline camp with barges on their cradles, flocks on the hillside, and Mount Shelem in the clouds.",
+        placeholder: "Explore mode screenshot",
+      },
+      {
+        type: "image",
+        src: "/images/projects/barges/journey-map.jpg",
+        alt: "Illustrated journey map from the tower to the promised land",
+        caption:
+          "The journey map opens the story: 16 chapters tracing the route from the tower to the great deep and the promised land.",
+        placeholder: "Journey map screenshot",
+      },
+      {
+        type: "image",
+        src: "/images/projects/barges/dusk-launch.jpg",
+        alt: "Barges glowing with lit stones on the beach at dusk",
+        caption:
+          "At dusk the stones light the barges and the water around them. Time of day and the storm can be changed at any point.",
+        placeholder: "Dusk scene",
+      },
+    ],
+    links: [{ label: "Launch the experience", href: "https://brotherofjared.vercel.app" }],
   },
   {
     slug: "redo-claims-dashboard",
     eyebrow: "Industry Work",
     title: "Redo Claims Dashboard",
     oneLiner:
-      "An internal analytics and automation dashboard supporting a high-value claims pipeline.",
+      "ClaimTracker, an internal analytics and automation app for a shipping-claims pipeline worth roughly $180k a month.",
     summary:
-      "At Redo, I developed a dashboard that supported internal analytics, operational visibility, and process automation while serving as the subject matter expert for a meaningful revenue pipeline.",
+      "At Redo, a returns and package-protection platform for Shopify brands, I built ClaimTracker: an internal web app that pulls claims data from Snowflake and gives the team one place to track claims, carrier submissions, batches, and documents, while I served as the subject matter expert for the pipeline.",
     role: "Product Specialist",
     timeline: "Oct 2025 - Apr 2026",
     impact: [
-      "Supported a process tied to roughly $180k in monthly pipeline value.",
+      "Supported a claims pipeline tied to roughly $180k in monthly value.",
       "Resolved 500+ technical issues with perfect CSAT.",
-      "Turned user feedback into 30+ product enhancements.",
+      "Turned user feedback into 30+ product enhancements and helped secure 20+ five-star Shopify reviews.",
     ],
-    tech: ["Analytics", "Process Automation", "Internal Tools", "Product Ops"],
+    tech: ["Snowflake", "Analytics", "Process Automation", "Internal Tools", "Product Ops"],
     problem:
-      "Internal teams needed clearer visibility into claims operations and better ways to turn recurring tasks into reliable workflows.",
+      "Shipping claims move through many hands: merchants, carriers, and internal reviewers. The team had no single view of where claims stood, how much had been recovered, or which carriers and claim types were costing the most, and a lot of the follow-up work was manual.",
     solution:
-      "I built a dashboard-centered workflow that made analytics more accessible, surfaced operational bottlenecks, and improved the path from issue discovery to product improvements.",
+      "I built ClaimTracker around the data the team already had in Snowflake. It has an analytics view with totals for submitted, recovered, and pending value, carrier win rates, and breakdowns by status and type, plus pages for working individual claims, grouping them into carrier batches, and keeping supporting documents together. Filters for date, carrier, status, type, reason, and source make it easy to find bottlenecks.",
     outcomes: [
-      "Created an internal tool with real business relevance, not just a classroom prototype.",
-      "Improved feedback loops between users, account management, and engineering.",
-      "Helped strengthen retention with more responsive product support and improvements.",
+      "Gave operations a live picture of claim value, recovery, and carrier win rate instead of spreadsheet snapshots.",
+      "Made it easier to spot stalled claims and missing documents before they cost money.",
+      "Tightened the feedback loop between users, account management, and engineering.",
     ],
     media: [
       {
         type: "image",
         src: "/images/projects/redo/IMG_2390.jpeg",
-        alt: "Redo claims dashboard screenshot",
+        alt: "ClaimTracker claims analytics dashboard",
         caption:
-          "Redo claims dashboard view highlighting analytics, status details, and workflow context.",
+          "ClaimTracker's analytics view: Snowflake-backed totals, carrier win rate, and claims broken down by status and type (figures obscured).",
         placeholder: "Redo dashboard screenshot",
-      },
-      {
-        type: "video",
-        alt: "Redo workflow demo",
-        caption: "A short narrated clip would be perfect here.",
-        placeholder: "Internal tool walkthrough slot",
       },
     ],
   },
@@ -257,25 +311,25 @@ export const featuredProjects: FeaturedProject[] = [
     eyebrow: "Competition Project",
     title: "Ella Rises INTEX Project",
     oneLiner:
-      "A first-place data and AI experience built to help a nonprofit surface meaningful insights.",
+      "A first-place nonprofit platform with a management dashboard and an AI assistant that answers questions straight from the database.",
     summary:
-      "For BYU's IS Core INTEX competition, I helped build a management dashboard and custom AI agent that turned organizational data into clearer, more actionable insights.",
-    role: "Student Team Builder",
-    timeline: "2025",
+      "For BYU's IS Core INTEX competition, our team built a full web platform for Ella Rises, a nonprofit that runs STEAM and leadership programs for young women. It includes a public site, a participant portal, an admin dashboard for events, surveys, donations, and milestones, and a custom AI assistant I built that turns plain-English questions into safe, read-only database queries.",
+    role: "Full-Stack Developer",
+    timeline: "Dec 2025",
     impact: [
       "Won 1st Place in the BYU IS Core INTEX competition.",
-      "Combined dashboard thinking with AI-assisted insight delivery.",
-      "Focused on actionable information rather than just displaying raw data.",
+      "Built an AI assistant that lets nonprofit leaders ask questions of their data in plain English.",
+      "Shipped a deployed, role-based app with separate admin and participant experiences.",
     ],
-    tech: ["Dashboards", "AI Agent", "Data Visualization", "Information Systems"],
+    tech: ["Node.js", "Express", "PostgreSQL", "Knex", "EJS", "LLM API", "Role-Based Auth"],
     problem:
-      "Organizations often have plenty of data but no fast way to turn it into decisions that leaders can actually use.",
+      "Ella Rises tracks participants, events, surveys, donations, and milestones, but staff had no fast way to turn that data into answers. Every question meant digging through spreadsheets or waiting on someone technical.",
     solution:
-      "We designed a dashboard and AI-supported insight workflow that surfaced signals, patterns, and storylines decision makers could act on quickly.",
+      "We built a Node.js and Express app on PostgreSQL with a public site, a participant portal, and an admin dashboard. I built the AI assistant: it reads the database schema, writes a SQL query for the user's question, validates that the query is strictly read-only before running it, and explains the results in plain language. I also worked on the data model, HTTPS deployment, and the mobile navigation.",
     outcomes: [
-      "Delivered a polished competition-ready product experience.",
-      "Showcased the ability to combine business context with technical implementation.",
-      "Proved strong communication and product storytelling under deadline pressure.",
+      "Delivered a polished, competition-ready product that judges ranked first.",
+      "Showed that AI can safely sit on top of real organizational data with guardrails like read-only query validation.",
+      "Proved strong communication and product storytelling under a one-week deadline.",
     ],
     media: [
       {
@@ -283,74 +337,124 @@ export const featuredProjects: FeaturedProject[] = [
         src: "/images/projects/ella-rises/elladashboard.png",
         alt: "Ella Rises management dashboard",
         caption:
-          "The Ella Rises management dashboard surfaces donation trends, survey scores, and key milestones at a glance.",
+          "The management dashboard surfaces donation trends, survey scores, and key milestones at a glance.",
         placeholder: "Competition dashboard slot",
-      },
-      {
-        type: "image",
-        src: "/images/projects/ella-rises/homepageEllarises.png",
-        alt: "Ella Rises public site homepage",
-        caption:
-          "Public-facing homepage experience that introduces Ella Rises and connects visitors to impact stories.",
-        placeholder: "Homepage image",
       },
       {
         type: "image",
         src: "/images/projects/ella-rises/ellaaiassistant.png",
         alt: "Ella Rises AI assistant screen",
         caption:
-          "Custom AI assistant view that turns data into conversational insights for nonprofit leaders.",
+          "The AI assistant turns plain-English questions into validated, read-only SQL and explains the results.",
         placeholder: "AI assistant screen",
+      },
+      {
+        type: "image",
+        src: "/images/projects/ella-rises/homepageEllarises.png",
+        alt: "Ella Rises public site homepage",
+        caption:
+          "Public homepage that introduces Ella Rises and connects visitors to programs and impact stories.",
+        placeholder: "Homepage image",
       },
       {
         type: "image",
         src: "/images/projects/ella-rises/myteam.jpeg",
         alt: "Ella Rises INTEX team photo",
-        caption:
-          "Team photo from the BYU IS Core INTEX competition where the Ella Rises project took first place.",
+        caption: "Our team at the BYU IS Core INTEX competition.",
         placeholder: "Team photo image",
       },
       {
         type: "image",
         src: "/images/projects/ella-rises/1stplaceteam.jpeg",
         alt: "Ella Rises first place award photo",
-        caption: "Celebrating the first-place finish for the Ella Rises INTEX project.",
+        caption: "Celebrating the first-place finish.",
         placeholder: "First-place award image",
       },
-      {
-        type: "video",
-        alt: "Ella Rises presentation clip",
-        caption: "A short clip from the presentation or demo would work well.",
-        placeholder: "Presentation video slot",
-      },
+    ],
+    links: [
+      { label: "View source", href: "https://github.com/elsieevans/ella-rises-nonprofit" },
     ],
   },
 ];
 
 export const secondaryProjects: SecondaryProject[] = [
   {
-    title: "AI Powered Discussion Board",
+    title: "TCP Handshake",
+    year: "2026",
     description:
-      "Explored AI-assisted collaboration and conversation design through a discussion-centered product concept.",
-    tags: ["AI", "Product Thinking", "UX"],
+      "A retro terminal-style website for my DJ duo, with a boot-up animation, keyboard navigation, a live countdown to the next party, and ASCII-art event flyers generated from images by a Python script I wrote.",
+    tags: ["HTML / CSS / JS", "Python", "Creative Coding"],
+    image: {
+      src: "/images/projects/tcp-handshake/terminal-home.jpg",
+      alt: "TCP Handshake terminal-style homepage with green ASCII logo",
+    },
+    links: [{ label: "Visit site", href: "https://tcphandshake.skylersmith.me" }],
+  },
+  {
+    title: "Hermes School OS",
+    year: "2026",
+    description:
+      "A personal AI agent running on a Raspberry Pi that syncs assignments from Learning Suite and Canvas into a Markdown knowledge base, flags uncertain due dates instead of guessing, and builds a daily Must / Should / Could plan that fits the time I actually have.",
+    tags: ["AI Agents", "Python", "Automation"],
+  },
+  {
+    title: "VibeVoice",
+    year: "2026",
+    description:
+      "A native macOS push-to-talk dictation app. Hold a key, speak, and cleaned-up text appears in whatever field is focused. Built in Swift with a waveform overlay, Whisper transcription, and an LLM cleanup pass, all in about 15 MB of memory.",
+    tags: ["Swift", "macOS", "Speech-to-Text", "LLM"],
+  },
+  {
+    title: "Sunrise (INTEX II)",
+    year: "2026",
+    description:
+      "A case management and fundraising platform for a nonprofit that runs safehouses for survivors of trafficking. I built much of the staff admin dashboard and .NET API endpoints; the team deployed it on Azure alongside four machine learning services for donor health, resident wellbeing, and social media.",
+    tags: ["React", ".NET", "PostgreSQL", "Azure", "ML Services"],
+    links: [{ label: "View source", href: "https://github.com/ryanabaldwin/Sunrise" }],
+  },
+  {
+    title: "Late-Delivery Prediction Pipeline",
+    year: "2026",
+    description:
+      "An end-to-end ML pipeline that rebuilds a warehouse table, retrains a late-delivery model, and scores open orders on a daily GitHub Actions schedule, writing predictions back to Supabase for a web app to use.",
+    tags: ["Python", "scikit-learn", "Supabase", "GitHub Actions"],
+    links: [{ label: "View source", href: "https://github.com/osideskyler/shoppipeline" }],
+  },
+  {
+    title: "Desert Ridge Contracting",
+    year: "2025",
+    description:
+      "A website and lead manager for a remodeling contractor: a public site that captures project inquiries and a login-protected admin dashboard for reviewing and updating leads.",
+    tags: ["Express", "EJS", "Supabase", "Client Work"],
+  },
+  {
+    title: "AI Facebook Marketplace Agent",
+    year: "2025",
+    description:
+      "Upseller, a hackathon project (Honorable Mention) that handles inbound buyer messages for Marketplace sellers: it sorts messages, spots scams, negotiates within the seller's limits, proposes meetup times, and sends calendar invites, with a review mode that drafts replies before anything is sent.",
+    tags: ["AI Agents", "TypeScript", "Scheduling", "Hackathon"],
+    links: [{ label: "View source", href: "https://github.com/jakenef/marketplace-seller-ai" }],
+  },
+  {
+    title: "AI Powered Discussion Board",
+    year: "2025",
+    description:
+      "A discussion board for a BYU analytics class where students post R code and errors and get an instant AI answer with syntax-highlighted code, plus topics, search, voting, and admin tools to pin and resolve posts.",
+    tags: ["Python", "Flask", "Gemini API", "SQLite"],
+    links: [{ label: "View source", href: "https://github.com/osideskyler/byu-discussion-board" }],
+  },
+  {
+    title: "BYU QIB Club Website",
+    year: "2025",
+    description:
+      "Launched a React and Vercel site that improved visibility for the club's events and member resources.",
+    tags: ["React", "Vercel", "Web Design"],
   },
   {
     title: "Ski Resort Parking Automation",
     description:
       "Applied systems thinking to a real operational pain point with automation and flow optimization.",
     tags: ["Automation", "Operations", "Systems"],
-  },
-  {
-    title: "AI Facebook Marketplace Agent",
-    description:
-      "Built a workflow that automated buyer communication and calendar scheduling, earning hackathon recognition.",
-    tags: ["LLM Workflows", "Scheduling", "Hackathon"],
-  },
-  {
-    title: "BYU QIB Club Website",
-    description:
-      "Launched a React and Vercel site that improved visibility for events and member resources.",
-    tags: ["React", "Vercel", "Web Design"],
   },
   {
     title: "OpenClaw Bot",

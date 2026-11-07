@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { ProjectMediaFrame } from "@/components/project-media";
@@ -109,6 +109,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.summary}
           </p>
 
+          {project.links?.length ? (
+            <div className="mt-8 flex flex-wrap gap-3">
+              {project.links.map((link) => (
+                <Button key={link.href} asChild variant="secondary">
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">
+                    {link.label}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </Button>
+              ))}
+            </div>
+          ) : null}
+
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             <div className="border-t border-white/10 pt-4">
               <p className="text-xs uppercase tracking-[0.25em] text-white/40">Role</p>
@@ -169,7 +182,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               description="Screenshots and demos from the actual build."
             />
             <div className="mt-10 grid gap-6">
-              {project.media.map((item, index) => (
+              {project.media.filter((item) => item.src).map((item, index) => (
                 <Reveal key={`${project.slug}-${item.alt}`} delay={index * 0.06}>
                   <ProjectMediaFrame item={item} />
                 </Reveal>

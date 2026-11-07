@@ -3,7 +3,7 @@ import path from "path";
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUp, Mountain } from "lucide-react";
+import { ArrowRight, ArrowUp, ArrowUpRight, Mountain } from "lucide-react";
 
 import { CopyEmailButton } from "@/components/copy-email-button";
 import { ExperienceTimeline } from "@/components/experience-timeline";
@@ -113,7 +113,7 @@ export default function Home() {
             <SectionHeading
               eyebrow="Featured Work"
               title="Projects"
-              description="A portfolio of AI, product, and software projects spanning verification, analytics, automation, and data experiences."
+              description="AI, product, and software projects spanning identity verification, interactive 3D, analytics, automation, and data experiences."
             />
           </Reveal>
           <div className="mt-16 divide-y divide-white/8">
@@ -303,16 +303,50 @@ export default function Home() {
                       <span className="font-display text-2xl font-light text-white/[0.08] select-none">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <div>
-                        <h3 className="text-base font-semibold text-white">
-                          {project.title}
-                        </h3>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                          <h3 className="text-base font-semibold text-white">
+                            {project.title}
+                          </h3>
+                          {project.year ? (
+                            <span className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-white/35">
+                              {project.year}
+                            </span>
+                          ) : null}
+                        </div>
+                        {project.image ? (
+                          <div className="relative mt-4 aspect-[16/10] overflow-hidden rounded-xl border border-white/10">
+                            <Image
+                              src={project.image.src}
+                              alt={project.image.alt}
+                              fill
+                              className="object-cover"
+                              sizes="(min-width: 1024px) 40vw, 100vw"
+                            />
+                          </div>
+                        ) : null}
                         <p className="mt-2 text-sm leading-6 text-white/55">
                           {project.description}
                         </p>
                         <p className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-white/30">
                           {project.tags.join("  /  ")}
                         </p>
+                        {project.links?.length ? (
+                          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                            {project.links.map((link) => (
+                              <a
+                                key={link.href}
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-xs uppercase tracking-[0.18em] text-[rgba(148,213,174,0.8)] transition-colors hover:text-white"
+                              >
+                                {link.label}
+                                <ArrowUpRight className="h-3.5 w-3.5" />
+                              </a>
+                            ))}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                   </div>

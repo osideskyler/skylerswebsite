@@ -44,6 +44,8 @@ The layouts are ready for real media. Recommended folders:
 - `public/images/projects/trust-scores`
 - `public/images/projects/redo`
 - `public/images/projects/ella-rises`
+- `public/images/projects/barges`
+- `public/images/projects/tcp-handshake`
 - `public/videos/projects/trust-scores`
 - `public/videos/projects/redo`
 - `public/videos/projects/ella-rises`
