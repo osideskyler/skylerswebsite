@@ -57,7 +57,9 @@ export type ResumeHighlightIcon =
   | "layoutDashboard"
   | "megaphone"
   | "users"
-  | "languages";
+  | "languages"
+  | "sparkles"
+  | "presentation";
 
 export type ResumeHighlightCard = {
   label: string;
@@ -82,6 +84,18 @@ export const siteMeta = {
 
 export const rotatingResumeCards: ResumeHighlightCard[] = [
   {
+    label: "Pattern",
+    value: "300+",
+    detail: "Governed the rollout of Claude skills and 50+ team plugins across the enterprise.",
+    icon: "sparkles",
+  },
+  {
+    label: "Pattern",
+    value: "50+",
+    detail: "Led AI enablement workshops on cost optimization, plus biweekly advanced sessions.",
+    icon: "presentation",
+  },
+  {
     label: "Trust Scores",
     value: "98%",
     detail: "Cut verification cost per user in the Trust Scores platform.",
@@ -90,7 +104,7 @@ export const rotatingResumeCards: ResumeHighlightCard[] = [
   {
     label: "Redo",
     value: "$180k/mo",
-    detail: "Acted as SME for a claims dashboard workflow at Redo.",
+    detail: "Acted as SME for a claims dashboard pipeline at Redo.",
     icon: "briefcaseBusiness",
   },
   {
@@ -198,14 +212,14 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     slug: "redo-claims-dashboard",
-    eyebrow: "Current Work",
+    eyebrow: "Industry Work",
     title: "Redo Claims Dashboard",
     oneLiner:
       "An internal analytics and automation dashboard supporting a high-value claims pipeline.",
     summary:
       "At Redo, I developed a dashboard that supported internal analytics, operational visibility, and process automation while serving as the subject matter expert for a meaningful revenue pipeline.",
     role: "Product Specialist",
-    timeline: "Oct 2025 - Present",
+    timeline: "Oct 2025 - Apr 2026",
     impact: [
       "Supported a process tied to roughly $180k in monthly pipeline value.",
       "Resolved 500+ technical issues with perfect CSAT.",
@@ -354,14 +368,25 @@ export const secondaryProjects: SecondaryProject[] = [
 
 export const experiences: ExperienceItem[] = [
   {
+    title: "AI Enablement & Automation Intern",
+    organization: "Pattern",
+    location: "Lehi, UT",
+    dates: "Apr 2026 - Present",
+    bullets: [
+      "Spearheaded enterprise AI enablement, leading biweekly advanced sessions for 20+ reps and 50+ workshops on cost optimization.",
+      "Mapped team workflows with managers and architected custom MCP servers to streamline enterprise data access.",
+      "Governed the rollout of 50+ team plugins and 300+ Claude skills, consulting cross-functional teams to automate manual processes.",
+    ],
+  },
+  {
     title: "Product Specialist",
     organization: "Redo",
     location: "Draper, UT",
-    dates: "Oct 2025 - Present",
+    dates: "Oct 2025 - Apr 2026",
     bullets: [
-      "Developed a claims dashboard web app for analytics and process automation.",
-      "Acted as SME for a workflow supporting roughly $180k per month in pipeline value.",
+      "Built a claims dashboard web app for internal analytics and process automation, acting as SME for a $180k/mo pipeline.",
       "Resolved 500+ technical issues with perfect CSAT and translated feedback into 30+ enhancements.",
+      "Secured 20+ five-star Shopify reviews toward a 5.0 overall rating, partnering with account management and engineering on retention.",
     ],
   },
   {
@@ -381,9 +406,20 @@ export const experiences: ExperienceItem[] = [
     location: "Remote / Lehi, UT",
     dates: "May 2025 - Jul 2025",
     bullets: [
-      "Cut cost per result by 50% while improving lead quality.",
-      "Revamped landing pages and SEO to improve discoverability.",
-      "Delivered high-volume creative testing to increase campaign efficiency.",
+      "Designed Meta ad campaigns that cut cost per result by 50% while improving lead quality (150+ leads).",
+      "Revamped landing pages and SEO to support broader product offerings and improve AI-search visibility.",
+      "Delivered a high volume of diverse ad creatives to maximize campaign efficiency through a bid cap strategy.",
+    ],
+  },
+  {
+    title: "Rental Sales Coordinator",
+    organization: "RV Fun Center",
+    location: "Oceanside, CA",
+    dates: "Jun 2024 - Aug 2024",
+    bullets: [
+      "Trained an AI chatbot on FAQs using Podium and prompt engineering to support customers 24/7.",
+      "Generated $15K+ in revenue by converting inbound calls into bookings and upselling add-ons.",
+      "Improved lead engagement with customized follow-up sequences and daily check-ins.",
     ],
   },
   {
@@ -414,13 +450,16 @@ export const education = {
 export const skillGroups: SkillGroup[] = [
   {
     title: "Build Stack",
-    items: ["React", "TypeScript", "Python", "SQL", "AWS", "Supabase", "Go"],
+    items: ["React", "TypeScript", "Python", "SQL", "C#", "AWS", "Supabase", "Go"],
   },
   {
     title: "AI and Automation",
     items: [
-      "Cursor",
       "Claude Code / Cowork",
+      "MCP Servers",
+      "Claude Skills & Plugins",
+      "n8n",
+      "Cursor",
       "LLM APIs",
       "Agentic Workflows",
       "Prompt Design",

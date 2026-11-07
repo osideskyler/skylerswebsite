@@ -13,6 +13,8 @@ import {
   Languages,
   LayoutDashboard,
   Megaphone,
+  Presentation,
+  Sparkles,
   Trophy,
   Users,
 } from "lucide-react";
@@ -40,6 +42,8 @@ const iconMap: Record<ResumeHighlightIcon, LucideIcon> = {
   megaphone: Megaphone,
   users: Users,
   languages: Languages,
+  sparkles: Sparkles,
+  presentation: Presentation,
 };
 
 function getInitialVisibleCards(
