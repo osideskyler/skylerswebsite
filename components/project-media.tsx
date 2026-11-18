@@ -24,8 +24,9 @@ export function ProjectMediaFrame({ item, className }: ProjectMediaProps) {
         {item.src ? (
           isVideo ? (
             <video
-              className="h-full w-full object-cover"
+              className="h-full w-full bg-black object-contain"
               controls
+              playsInline
               poster={item.poster}
               preload="metadata"
             >

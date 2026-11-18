@@ -21,6 +21,7 @@ export type FeaturedProject = {
   solution: string;
   outcomes: string[];
   media: ProjectMedia[];
+  links?: { label: string; href: string }[];
 };
 
 export type SecondaryProject = {
@@ -83,6 +84,12 @@ export const siteMeta = {
 };
 
 export const rotatingResumeCards: ResumeHighlightCard[] = [
+  {
+    label: "Cloud Native Hackathon",
+    value: "$4,000",
+    detail: "Won the Elasticsearch track at the WeMakeDevs Cloud Native Hackathon with Nautilus.",
+    icon: "trophy",
+  },
   {
     label: "Pattern",
     value: "300+",
@@ -152,6 +159,74 @@ export const rotatingResumeCards: ResumeHighlightCard[] = [
 ];
 
 export const featuredProjects: FeaturedProject[] = [
+  {
+    slug: "nautilus-hackathon",
+    eyebrow: "Hackathon Winner · Elasticsearch Track · $4,000",
+    title: "Nautilus",
+    oneLiner:
+      "A phone app that captions the conversation around you and explains the jargon you personally don't know, the moment it's said.",
+    summary:
+      "Built in one day at the WeMakeDevs Cloud Native Hackathon in Salt Lake City during KubeCon week, Nautilus won the Elasticsearch track and $4,000. A one-minute probe maps what each attendee already knows, so a Kubernetes veteran and a first-timer sitting side by side see different cards. Afterwards, the terms you heard become a recap, flashcards, and a searchable record you can question in your own language.",
+    role: "Product & Content Lead (team of 4)",
+    timeline: "Nov 2026 · One-day build",
+    impact: [
+      "Won the Elasticsearch track and $4,000 at the WeMakeDevs Cloud Native Hackathon.",
+      "Explainer cards appear within about 800 ms of a term being spoken, with Elasticsearch as the only data store.",
+      "Personalized to each listener: a short knowledge probe decides which of 200 glossary terms deserve a card.",
+    ],
+    tech: [
+      "Elasticsearch",
+      "FastAPI",
+      "React PWA",
+      "Deepgram STT",
+      "AWS EKS",
+      "Dash0",
+      "Gitar",
+    ],
+    problem:
+      "Conferences are full of jargon. New attendees, career switchers, and non-native speakers end up nodding along through talks and hallway conversations they only half understand, and live captions alone don't explain anything.",
+    solution:
+      "Audio streams from the phone to Deepgram for live captions. An on-device matcher pops cards for known glossary terms instantly, and an Elasticsearch percolator runs every final transcript against one stored query per term to catch anything the phone missed. Hybrid search over everything said powers 'Ask your conference', so a question in Spanish finds the English moment. I led the product plan and pitch, wrote the 200-term glossary and its validator, built the 'Tune it to me' follow-up probe, tested speech-to-text accuracy across accents, set up Gitar code-review rules for the team, and cut the demo video.",
+    outcomes: [
+      "Shipped a live, deployed product on AWS EKS in a single hackathon day.",
+      "Every change landed through Gitar-reviewed pull requests, with Dash0 traces and an SLO on word-to-card latency.",
+      "Doubles as live captions for deaf and hard-of-hearing attendees.",
+    ],
+    media: [
+      {
+        type: "video",
+        src: "/videos/projects/nautilus/nautilus-demo.mp4",
+        poster: "/images/projects/nautilus/nautilus-demo-poster.jpg",
+        alt: "Nautilus hackathon demo video",
+        caption:
+          "Demo: two people talk into their own phones, and each sees cards only for the terms they don't know.",
+        placeholder: "Demo video",
+      },
+      {
+        type: "image",
+        src: "/images/projects/nautilus/phone-screens.jpg",
+        alt: "Nautilus phone screens: knowledge map, live cards, recap, and ask",
+        caption:
+          "Knowledge map, live captions with jargon cards, recap of new terms, and 'Ask your conference' search.",
+        placeholder: "Phone screens",
+      },
+      {
+        type: "image",
+        src: "/images/projects/nautilus/stage-view.jpg",
+        alt: "Nautilus stage view showing two phones side by side",
+        caption:
+          "The projector stage view shows two listeners' phones side by side, each with personalized cards.",
+        placeholder: "Stage view",
+      },
+    ],
+    links: [
+      { label: "View code on GitHub", href: "https://github.com/zackhada/confpilot" },
+      {
+        label: "See the hackathon winners",
+        href: "https://www.wemakedevs.org/hackathons/cnh/projects",
+      },
+    ],
+  },
   {
     slug: "trust-scores-app",
     eyebrow: "Flagship Project",
