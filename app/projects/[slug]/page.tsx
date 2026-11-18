@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
 
 import { ProjectMediaFrame } from "@/components/project-media";
@@ -95,7 +95,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </Link>
           </Button>
 
-          <span className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[rgba(148,213,174,0.85)]">
+          <span className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-[rgba(148,213,174,0.85)]">
             <span className="inline-block h-px w-8 bg-[rgba(148,213,174,0.4)]" />
             {project.eyebrow}
           </span>
@@ -108,6 +108,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           <p className="mt-6 max-w-3xl text-base leading-7 text-white/64">
             {project.summary}
           </p>
+
+          {project.links?.length ? (
+            <div className="mt-8 flex flex-wrap gap-3">
+              {project.links.map((link) => (
+                <Button key={link.href} asChild variant="secondary">
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">
+                    {link.label}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </Button>
+              ))}
+            </div>
+          ) : null}
 
           <div className="mt-10 grid gap-6 sm:grid-cols-3">
             <div className="border-t border-white/10 pt-4">
